@@ -1,0 +1,62 @@
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: #25D366; /* WhatsApp green */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.whatsapp-button .icon {
+  font-size: 28px;
+  animation: whatsappPulse 1.8s ease-in-out infinite;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  background-color: #1ebe5d;
+}
+
+.whatsapp-button:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.5);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .whatsapp-button {
+    bottom: 16px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+  .whatsapp-button .icon {
+    font-size: 26px;
+  }
+}
+
+/* Pulse animation: gently grows then returns to normal size */
+@keyframes whatsappPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-button .icon {
+    animation: none;
+  }
+}
+
+/* Pause the blink while hovering to reduce distraction */
+.whatsapp-button:hover .icon {
+  animation-play-state: paused;
+}

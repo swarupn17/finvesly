@@ -1,0 +1,154 @@
+.footer {
+  background-color: #111;
+  color: #fff;
+  padding: 80px 0 30px;
+  font-family: 'Lato', sans-serif;
+  border-top: 1px solid #333;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 30px;
+  padding-right: 20px;
+}
+
+.brand-col {
+  flex: 1.5;
+}
+
+.footer-logo {
+  height: 220px;
+  width: auto;
+  margin-bottom: 20px;
+  mix-blend-mode: screen; /* Assuming the logo has a black background */
+}
+
+.footer-description {
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  max-width: 300px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.social-icon:hover {
+  background-color: #4CAF50;
+  transform: translateY(-3px);
+}
+
+.footer-col h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-col h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 2px;
+  background-color: #4CAF50;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footer-col ul li a:hover {
+  color: #4CAF50;
+  padding-left: 5px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.contact-item .icon {
+  color: #4CAF50;
+  margin-right: 15px;
+  margin-top: 4px;
+  font-size: 1.1rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid #222;
+  padding-top: 30px;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.copyright {
+  margin-bottom: 10px;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .footer-row {
+    flex-direction: column;
+  }
+  
+  .footer-col {
+    margin-bottom: 40px;
+  }
+}

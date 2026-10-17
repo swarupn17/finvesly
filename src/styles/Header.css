@@ -1,0 +1,158 @@
+.header {
+  background-color: transparent;
+  border-bottom: none;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100px; /* Fixed height */
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  transition: all 0.3s ease;
+}
+
+.header:hover, .header.scrolled {
+  background-color: #000;
+}
+
+.header:hover .logo a, .header.scrolled .logo a {
+  color: #fff;
+}
+
+.header:hover .nav a, .header.scrolled .nav a {
+  color: #fff;
+}
+
+.header:hover .nav a:hover, .header.scrolled .nav a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  height: 180%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  height: 100%;
+}
+
+.logo-image {
+  height: 100%; /* Fill height */
+  width: auto;
+  display: block;
+  padding: 0;
+  /* Assumes light logo has white bg -> multiply makes it transparent */
+  mix-blend-mode: multiply;
+}
+
+.header:hover .logo-image, .header.scrolled .logo-image {
+  /* Assumes dark logo has black bg -> screen makes it transparent */
+  mix-blend-mode: screen;
+}
+
+.nav {
+  display: flex;
+  gap: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 15px 15px;
+  text-decoration: none;
+  color: #000000;
+  font-family: 'alternate-gothic-no-2-d', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  transition: 0.5s ease;
+  background-color: transparent;
+  margin-right: 20px;
+
+}
+
+.nav a:hover {
+  background-color: #000;
+  color: #fff;
+  border-radius: 0px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Invest Button Styles */
+.nav a.invest-btn {
+  background-color: #39b54a; /* Vibrant green from logo */
+  color: #ffffff !important; /* Force white text */
+  border-radius: 50px; /* Rounded pill shape for modern look */
+  padding: 12px 30px;
+  font-weight: 700;
+  margin-right: 0; /* Remove right margin for the last item */
+  border: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(57, 181, 74, 0.4); /* Green glow */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 15px;
+  font-size: 15px;
+}
+
+.nav a.invest-btn:hover {
+  background-color: #2ea03f; /* Slightly darker on hover */
+  transform: translateY(-2px) scale(1.05); /* Lift and scale effect */
+  box-shadow: 0 6px 20px rgba(57, 181, 74, 0.6); /* Stronger glow */
+  color: #ffffff !important;
+}
+
+.nav a.invest-btn:active {
+  transform: translateY(1px) scale(0.98); /* Click effect */
+  box-shadow: 0 2px 10px rgba(57, 181, 74, 0.3);
+}
+
+/* Ensure button looks good when header is dark */
+.header:hover .nav a.invest-btn, 
+.header.scrolled .nav a.invest-btn {
+  color: #ffffff !important;
+  background-color: #39b54a;
+}
+
+.header:hover .nav a.invest-btn:hover, 
+.header.scrolled .nav a.invest-btn:hover {
+  background-color: #2ea03f;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .nav {
+    margin-top: 20px;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav a.invest-btn {
+    margin-top: 10px;
+  }
+}

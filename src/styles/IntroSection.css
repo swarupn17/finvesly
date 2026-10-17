@@ -1,0 +1,93 @@
+.intro-section {
+  padding: 100px 20px 200px; /* Extra bottom padding for scroll space */
+  text-align: center;
+  background-color: #fff;
+  overflow: hidden; /* Prevent scrollbars from flying images */
+  position: relative;
+}
+
+.intro-text {
+  max-width: 800px;
+  margin: 0 auto 50px; /* Reduced margin to 50px */
+  position: relative;
+  z-index: 20;
+}
+
+.intro-text h2 {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.intro-text p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.images-container {
+  position: relative;
+  /* height: 900px; Removed fixed height to reduce gap */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.center-image-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 450px; /* Reduced from 600px */
+  max-width: 90%;
+}
+
+.center-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.floating-image-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 280px; /* Increased from 200px */
+  margin-top: -100px; /* Adjusted for new size (approx half height) */
+  margin-left: -140px; /* Adjusted for new size (half width) */
+  /* transition removed for direct scroll control */
+  will-change: transform;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.floating-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 5px solid #fff; /* White border like photos */
+}
+
+@media (max-width: 768px) {
+  .intro-text h2 {
+    font-size: 36px;
+  }
+  
+  /* .images-container {
+    height: 400px; 
+  } Removed to match desktop behavior */
+  
+  .floating-image-wrapper {
+    width: 120px;
+    margin-left: -60px;
+  }
+  
+  /* Reduce spread on mobile */
+  /* This would require JS logic update or CSS media queries overriding the inline styles, 
+     but inline styles are hard to override. 
+     Ideally, we'd pass a 'isMobile' prop to the component or use CSS variables.
+     For now, the scale might just look a bit crowded but functional. */
+}

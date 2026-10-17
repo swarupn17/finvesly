@@ -1,0 +1,106 @@
+.essential-conversations {
+  background-color: #000;
+  color: #fff;
+  padding: 100px 20px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.ec-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ec-heading {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 80px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.ec-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.ec-item {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ec-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-icon {
+  width: 100%;
+  height: 100%;
+  stroke: #fff;
+}
+
+.ec-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ec-text {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  max-width: 250px;
+  line-height: 1.5;
+}
+
+.ec-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px; /* Align roughly with icons */
+}
+
+.ec-divider-line {
+  width: 50px;
+  height: 1px;
+  background-color: #fff;
+}
+
+.ec-divider-text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .ec-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .ec-divider {
+    transform: rotate(90deg);
+  }
+  
+  .ec-heading {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+}
