@@ -15,19 +15,26 @@ import {
   FaWhatsapp,
 } from 'react-icons/fa';
 import './App.css';
-import logo from './assets/light.png';
+import darkLogo from './assets/dark.png';
+import lightLogo from './assets/light.png';
 import founder from './assets/swrup.png';
 import investment from './assets/investImg.jpg';
 import insurance from './assets/insurance.png';
-import retirement from './assets/retirement.jpg';
+import retirementPhoto from './assets/retirement.jpg';
+import retirementPlan from './assets/retire.png';
 import education from './assets/education.jpg';
 import savings from './assets/saving.jpg';
 import wealth from './assets/wealth.jpg';
+import marriage from './assets/marriage.jpg';
+import impactIcon from './assets/icon.png';
+import workshopOne from './assets/edu1.jpg';
+import workshopThree from './assets/edu3.jpg';
+import workshopFour from './assets/edu4.jpg';
 
 const services = [
   { title: 'Investment planning', text: 'Build a long-term strategy around your goals, time horizon and comfort with risk.', image: investment, tag: 'Build wealth' },
   { title: 'Protection planning', text: 'Put a thoughtful protection layer around the people and goals that matter most.', image: insurance, tag: 'Protect what matters' },
-  { title: 'Retirement planning', text: 'Turn your vision for independence into a clear, regularly reviewed financial roadmap.', image: retirement, tag: 'Plan ahead' },
+  { title: 'Retirement planning', text: 'Turn your vision for independence into a clear, regularly reviewed financial roadmap.', image: retirementPlan, tag: 'Plan ahead' },
   { title: 'Education planning', text: 'Create room for a child’s future ambitions with disciplined, goal-led investing.', image: education, tag: 'Invest in futures' },
   { title: 'Tax-smart saving', text: 'Explore appropriate saving routes with tax considerations built into the conversation.', image: savings, tag: 'Save with purpose' },
   { title: 'Wealth reviews', text: 'Bring your existing investments together for a more connected view of your money.', image: wealth, tag: 'Stay on course' },
@@ -69,13 +76,15 @@ function App() {
         <a href="tel:+919359049092"><FaPhoneAlt /> +91 93590 49092</a>
       </div>
 
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="Finvesly Capital home">
-          <img src={logo} alt="Finvesly Capital" />
-        </a>
+        <header className="site-header">
+          <a className="brand" href="#home" aria-label="Finvesly Capital home">
+            <span className="brand-wordmark"><span>Finvesly</span><b>Capital</b></span>
+            <small>Har Ghar Investor, Kal Hoga Secure!</small>
+          </a>
         <nav className={menuOpen ? 'main-nav main-nav--open' : 'main-nav'} aria-label="Main navigation">
           <button onClick={() => scrollTo('#about')}>Why Finvesly</button>
           <button onClick={() => scrollTo('#services')}>Services</button>
+          <button onClick={() => scrollTo('#impact')}>Our impact</button>
           <button onClick={() => scrollTo('#process')}>Our process</button>
           <button onClick={() => scrollTo('#contact')}>Contact</button>
         </nav>
@@ -120,6 +129,28 @@ function App() {
           </div>
         </section>
 
+        <section className="impact-section" id="impact">
+          <div className="content-wrap">
+            <div className="section-heading impact-heading">
+              <div><p className="eyebrow"><span /> Financial literacy in action</p><h2>Trust is earned long before a decision is made.</h2></div>
+              <p>We believe every meaningful financial journey begins with understanding. These are moments from financial-awareness conversations and learning sessions in the community.</p>
+            </div>
+            <div className="impact-layout">
+              <div className="workshop-gallery">
+                <figure className="workshop-photo workshop-photo--lead"><img src={workshopThree} alt="A large financial-awareness session" /><figcaption>Investor education session</figcaption></figure>
+                <figure className="workshop-photo"><img src={workshopOne} alt="A financial-awareness discussion with a community group" /><figcaption>Community conversation</figcaption></figure>
+                <figure className="workshop-photo"><img src={workshopFour} alt="An audience attending a financial-planning presentation" /><figcaption>Learning together</figcaption></figure>
+              </div>
+              <aside className="impact-aside">
+                <img className="brand-stamp" src={lightLogo} alt="Finvesly Capital" />
+                <p className="quote-label">A principle worth keeping</p>
+                <blockquote>“Diligence is the mother of good luck.”<cite>Benjamin Franklin · <em>Poor Richard’s Almanack</em></cite></blockquote>
+                <p>From large awareness sessions to a one-to-one conversation, the objective stays the same: make money matters easier to understand and act on.</p>
+              </aside>
+            </div>
+          </div>
+        </section>
+
         <section className="focus-section" id="services">
           <div className="content-wrap">
             <div className="section-heading">
@@ -140,8 +171,19 @@ function App() {
         <section className="quote-section">
           <div className="content-wrap quote-grid">
             <p className="quote-mark">“</p>
-            <div><p className="eyebrow eyebrow--light"><span /> The Finvesly approach</p><h2>Good financial decisions are rarely about finding a shortcut. They’re about building habits that last.</h2></div>
-            <div className="quote-side"><span>Clear direction</span><span>Regular review</span><span>Patient progress</span></div>
+            <div><p className="eyebrow eyebrow--light"><span /> A timeless reminder</p><h2>Beware of little expenses; a small leak will sink a great ship.</h2><p className="quote-attribution">Benjamin Franklin · <em>Poor Richard’s Almanack</em></p></div>
+            <div className="quote-side"><span>Plan with care</span><span>Review regularly</span><span>Build patiently</span></div>
+          </div>
+        </section>
+
+        <section className="life-goals-section">
+          <div className="content-wrap">
+            <div className="life-goals-heading"><div><p className="eyebrow"><span /> The life behind the numbers</p><h2>Make room for the moments you want to protect.</h2></div><p>A sound plan is not only about markets. It makes space for independence, family milestones and the everyday habits that support a more secure tomorrow.</p></div>
+            <div className="life-goals-grid">
+              <article className="life-goal-card life-goal-card--wide"><img src={retirementPhoto} alt="A family enjoying time together in retirement" /><div><span>Retirement readiness</span><h3>Plan for the years that are yours.</h3></div></article>
+              <article className="life-goal-card"><img src={marriage} alt="A couple exchanging wedding rings" /><div><span>Family milestones</span><h3>Prepare for life’s big celebrations.</h3></div></article>
+              <article className="life-goal-card life-goal-card--icon"><img src={impactIcon} alt="A hand supporting financial growth" /><div><span>Everyday progress</span><h3>Small steps can build a stronger future.</h3></div></article>
+            </div>
           </div>
         </section>
 
@@ -177,7 +219,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer"><div className="content-wrap footer-top"><div><img src={logo} alt="Finvesly Capital" /><p>Thoughtful financial planning for the life you’re building.</p></div><div><span>Explore</span><button onClick={() => scrollTo('#about')}>About Finvesly</button><button onClick={() => scrollTo('#services')}>Services</button><button onClick={() => scrollTo('#process')}>Our process</button></div><div><span>Connect</span><a href="tel:+919359049092">+91 93590 49092</a><a href="mailto:finvesly@gmail.com">finvesly@gmail.com</a><a href="https://wa.me/919359049092" target="_blank" rel="noreferrer">WhatsApp</a></div><div className="socials"><span>Follow</span><div><a href="#home" aria-label="Facebook"><FaFacebookF /></a><a href="#home" aria-label="Instagram"><FaInstagram /></a><a href="#home" aria-label="LinkedIn"><FaLinkedinIn /></a></div></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></footer>
+      <footer className="site-footer"><div className="content-wrap footer-top"><div><img src={darkLogo} alt="Finvesly Capital" /><p>Thoughtful financial planning for the life you’re building.</p></div><div><span>Explore</span><button onClick={() => scrollTo('#about')}>About Finvesly</button><button onClick={() => scrollTo('#services')}>Services</button><button onClick={() => scrollTo('#impact')}>Our impact</button><button onClick={() => scrollTo('#process')}>Our process</button></div><div><span>Connect</span><a href="tel:+919359049092">+91 93590 49092</a><a href="mailto:finvesly@gmail.com">finvesly@gmail.com</a><a href="https://wa.me/919359049092" target="_blank" rel="noreferrer">WhatsApp</a></div><div className="socials"><span>Follow</span><div><a href="#home" aria-label="Facebook"><FaFacebookF /></a><a href="#home" aria-label="Instagram"><FaInstagram /></a><a href="#home" aria-label="LinkedIn"><FaLinkedinIn /></a></div></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></footer>
 
       <a className="whatsapp-float" href="https://wa.me/919359049092" target="_blank" rel="noreferrer" aria-label="Chat with Finvesly on WhatsApp"><FaWhatsapp /></a>
     </div>
