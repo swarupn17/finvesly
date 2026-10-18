@@ -6,9 +6,6 @@ import {
   FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
   FaPhoneAlt,
   FaRegCalendarAlt,
   FaShieldAlt,
@@ -17,7 +14,6 @@ import {
 } from 'react-icons/fa';
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
 import './App.css';
-import darkLogo from './assets/dark.png';
 import lightLogo from './assets/light.png';
 import founder from './assets/swrup.png';
 import investment from './assets/investImg.jpg';
@@ -32,21 +28,24 @@ import impactIcon from './assets/icon.png';
 import workshopOne from './assets/edu1.jpg';
 import workshopThree from './assets/edu3.jpg';
 import workshopFour from './assets/edu4.jpg';
+import AboutPage from './components/AboutPage';
+import ServicesPage from './components/ServicesPage';
+import ContactPage from './components/ContactPage';
 
 const services = [
-  { title: 'Investment planning', text: 'Build a long-term strategy around your goals, time horizon and comfort with risk.', image: investment, tag: 'Build wealth' },
-  { title: 'Protection planning', text: 'Put a thoughtful protection layer around the people and goals that matter most.', image: insurance, tag: 'Protect what matters' },
-  { title: 'Retirement planning', text: 'Turn your vision for independence into a clear, regularly reviewed financial roadmap.', image: retirementPlan, tag: 'Plan ahead' },
-  { title: 'Education planning', text: 'Create room for a child’s future ambitions with disciplined, goal-led investing.', image: education, tag: 'Invest in futures' },
-  { title: 'Tax-smart saving', text: 'Explore appropriate saving routes with tax considerations built into the conversation.', image: savings, tag: 'Save with purpose' },
-  { title: 'Wealth reviews', text: 'Bring your existing investments together for a more connected view of your money.', image: wealth, tag: 'Stay on course' },
+  { title: 'Mutual fund investments', text: 'SIP, lump sum, STP and SWP solutions shaped around your goals.', image: investment, tag: 'Build wealth' },
+  { title: 'Insurance solutions', text: 'Life, health, motor and general insurance for the protection that matters.', image: insurance, tag: 'Protect what matters' },
+  { title: 'Retirement & income planning', text: 'Retirement corpus building and structured withdrawal strategies.', image: retirementPlan, tag: 'Plan ahead' },
+  { title: 'Goal-based planning', text: "Wealth creation, children’s education, marriage and other financial goals.", image: education, tag: 'Invest in futures' },
+  { title: 'Tax-efficient solutions', text: 'Tax-aware investment options aligned with financial objectives.', image: savings, tag: 'Save with purpose' },
+  { title: 'Portfolio review & allocation', text: 'Portfolio analysis, diversification and risk assessment for a clearer view.', image: wealth, tag: 'Stay on course' },
 ];
 
 const heroSlides = [
   {
-    eyebrow: 'Your financial life, thoughtfully planned',
-    title: 'More clarity for the life you’re building.',
-    description: 'Finvesly helps you make confident decisions around saving, investing, protection and the milestones that matter to your family.',
+    eyebrow: 'Financial awareness, made actionable',
+    title: 'A financially stronger India begins with awareness.',
+    description: 'Finvesly Capital Services LLP helps individuals, families, employees and communities make more informed financial decisions through practical education and responsible solutions.',
     image: founder,
     alt: 'Founder of Finvesly Capital',
     supportingImage: investment,
@@ -72,9 +71,9 @@ const heroSlides = [
     progressText: 'Reviewed as life moves',
   },
   {
-    eyebrow: 'Invest with patient purpose',
+    eyebrow: 'Educate first. Empower always.',
     title: 'Small, steady decisions can shape a stronger tomorrow.',
-    description: 'Create an investment rhythm that respects your comfort with risk, your timeline and the future you want to build.',
+    description: 'Explore financial solutions with goal-led conversations, responsible investing, and long-term thinking at their core.',
     image: wealth,
     alt: 'A saving and investment growth illustration',
     supportingImage: education,
@@ -88,16 +87,24 @@ const heroSlides = [
 ];
 
 const faqs = [
-  ['Who is Finvesly for?', 'Finvesly is built for individuals and families who want a more intentional relationship with their money, whether they are starting a SIP or reviewing an established portfolio.'],
-  ['What happens in the first conversation?', 'We start with the life you are planning for: your priorities, responsibilities, timeline and questions. That context helps shape the next steps.'],
-  ['Do you only help with investments?', 'No. The approach considers the wider picture: goals, savings habits, protection needs, investments and regular reviews.'],
-  ['How do I get started?', 'Use the enquiry form, call us, or send a WhatsApp message. We will coordinate a suitable time for a first discussion.'],
+  ['Who is Finvesly for?', 'Finvesly supports individuals, families, employees, corporates, schools, colleges, NGOs and Bachat Gats through financial solutions and financial-awareness initiatives.'],
+  ['What happens in the first conversation?', 'We begin with your goals, responsibilities, timeline and questions. That context helps us identify an appropriate next step.'],
+  ['Do you only help with investments?', 'No. Services also include goal-based financial planning support, retirement planning assistance, insurance solutions, portfolio reviews and financial education programs.'],
+  ['How do I get started?', 'Use the enquiry form, email us, or call us to coordinate a suitable first discussion.'],
 ];
+
+const pageNames = new Set(['home', 'about', 'services', 'contact']);
+
+const getPageFromHash = () => {
+  const page = window.location.hash.replace(/^#\/?/, '');
+  return pageNames.has(page) ? page : 'home';
+};
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [activePage, setActivePage] = useState(getPageFromHash);
   const [activeHero, setActiveHero] = useState(0);
   const [activeService, setActiveService] = useState(0);
   const [servicesPerView, setServicesPerView] = useState(() => (window.innerWidth <= 680 ? 1 : window.innerWidth <= 900 ? 2 : 3));
@@ -113,14 +120,30 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const updatePage = () => {
+      setActivePage(getPageFromHash());
+      setMenuOpen(false);
+      setSubmitted(false);
+      window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
+    };
+    window.addEventListener('hashchange', updatePage);
+    return () => window.removeEventListener('hashchange', updatePage);
+  }, [shouldReduceMotion]);
+
+  useEffect(() => {
     if (shouldReduceMotion) return undefined;
     const timer = window.setInterval(() => setActiveHero((current) => (current + 1) % heroSlides.length), 6500);
     return () => window.clearInterval(timer);
   }, [shouldReduceMotion]);
 
-  const scrollTo = (id) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+  const navigateTo = (page) => {
     setMenuOpen(false);
+    setSubmitted(false);
+    if (activePage === page) {
+      window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
+      return;
+    }
+    window.location.hash = page;
   };
 
   const submitEnquiry = (event) => {
@@ -152,29 +175,31 @@ function App() {
   return (
     <div className="site-shell">
       <div className="top-strip">
-        <span>Personal finance, made more considered.</span>
-        <a href="tel:+919359049092"><FaPhoneAlt /> +91 93590 49092</a>
+        <span>Empowering financial awareness. Building a financially stronger India.</span>
+        <a href="tel:+919130151120"><FaPhoneAlt /> +91 9130151120</a>
       </div>
 
         <Motion.header className="site-header" initial={shouldReduceMotion ? false : { opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shouldReduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}>
-          <a className="brand" href="#home" aria-label="Finvesly Capital home">
+          <a className="brand" href="#home" aria-label="Finvesly Capital Services LLP home" onClick={(event) => { event.preventDefault(); navigateTo('home'); }}>
             <span className="brand-wordmark"><span>Finvesly</span><b>Capital</b></span>
             <small>Har Ghar Investor, Kal Hoga Secure!</small>
           </a>
         <nav className={menuOpen ? 'main-nav main-nav--open' : 'main-nav'} aria-label="Main navigation">
-          <button onClick={() => scrollTo('#about')}>Why Finvesly</button>
-          <button onClick={() => scrollTo('#services')}>Services</button>
-          <button onClick={() => scrollTo('#impact')}>Our impact</button>
-          <button onClick={() => scrollTo('#process')}>Our process</button>
-          <button onClick={() => scrollTo('#contact')}>Contact</button>
+          <button className={activePage === 'home' ? 'is-current' : ''} onClick={() => navigateTo('home')}>Home</button>
+          <button className={activePage === 'about' ? 'is-current' : ''} onClick={() => navigateTo('about')}>About us</button>
+          <button className={activePage === 'services' ? 'is-current' : ''} onClick={() => navigateTo('services')}>Services</button>
+          <button className={activePage === 'contact' ? 'is-current' : ''} onClick={() => navigateTo('contact')}>Contact</button>
         </nav>
-        <button className="header-cta" onClick={() => scrollTo('#contact')}>Start a conversation <FaArrowRight /></button>
+        <button className="header-cta" onClick={() => navigateTo('contact')}>Start a conversation <FaArrowRight /></button>
         <button className="menu-toggle" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" aria-expanded={menuOpen}>
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </Motion.header>
 
-      <main>
+      <main id="main-content">
+        <AnimatePresence mode="wait" initial={false}>
+          <Motion.div key={activePage} initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: shouldReduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}>
+          {activePage === 'home' && <>
         <section className="hero" id="home" aria-label="Finvesly introduction">
           <AnimatePresence initial={false} mode="wait">
             <Motion.div className="hero-slide" key={heroSlide.title} initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }} transition={carouselTransition}>
@@ -184,8 +209,8 @@ function App() {
                   <h1>{heroSlide.title}</h1>
                   <p className="hero-description">{heroSlide.description}</p>
                   <div className="hero-actions">
-                    <button className="button button--primary" onClick={() => scrollTo('#contact')}>Start a conversation <FaArrowRight /></button>
-                    <button className="text-link" onClick={() => scrollTo('#services')}>Explore our services <span>↘</span></button>
+                    <button className="button button--primary" onClick={() => navigateTo('contact')}>Start a conversation <FaArrowRight /></button>
+                    <button className="text-link" onClick={() => navigateTo('services')}>Explore our services <span>↘</span></button>
                   </div>
                   <div className="hero-note"><FaShieldAlt /> Goal-led guidance. Real conversations. Long-term thinking.</div>
                 </Motion.div>
@@ -206,7 +231,7 @@ function App() {
           <div className="intro-label"><span>About Finvesly</span><i /></div>
           <div className="intro-copy">
             <h2>Money is personal. Your plan should be too.</h2>
-            <div><p>There is no one-size-fits-all route to financial wellbeing. We begin with the things you care about, then bring structure to the decisions that can help you move toward them.</p><button className="text-link" onClick={() => scrollTo('#process')}>See how we work <span>↘</span></button></div>
+            <div><p>We make financial knowledge simple, accessible, and actionable for every Indian - then connect that awareness to practical, responsible financial solutions.</p><button className="text-link" onClick={() => navigateTo('about')}>About Finvesly <span>↘</span></button></div>
           </div>
         </Motion.section>
 
@@ -236,19 +261,21 @@ function App() {
           <div className="content-wrap">
             <div className="section-heading section-heading--services">
               <div><p className="eyebrow"><span /> What we can plan for</p><h2>Every goal deserves a good beginning.</h2></div>
-              <div className="services-heading-side"><p>Explore the areas where a structured conversation can bring more direction to your next financial move.</p><div className="service-slider-controls"><button type="button" onClick={() => moveService(-1)} aria-label="Previous services" disabled={currentServiceIndex === 0}><FaChevronLeft /></button><button type="button" onClick={() => moveService(1)} aria-label="Next services" disabled={currentServiceIndex === maxServiceIndex}><FaChevronRight /></button></div></div>
+              <div className="services-heading-side"><p>Explore the areas where a structured conversation can bring more direction to your next financial move.</p></div>
             </div>
             <div className="service-slider" aria-roledescription="carousel" aria-label="Finvesly services">
+              <button className="service-slider-edge service-slider-edge--previous" type="button" onClick={() => moveService(-1)} aria-label="Previous services" disabled={currentServiceIndex === 0}><FaChevronLeft /></button>
               <Motion.div className="service-track" animate={{ x: `${-currentServiceIndex * (100 / services.length)}%` }} transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 118, damping: 25, mass: 0.9 }}>
               {services.map((service, index) => (
                 <div className="service-track-item" key={service.title}>
                 <Motion.article className="service-card service-slider-card" whileHover={shouldReduceMotion ? undefined : { y: -6, boxShadow: '0 20px 34px rgba(36, 65, 47, 0.12)' }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
                   <div className="service-image"><img src={service.image} alt="" /><span>{String(index + 1).padStart(2, '0')}</span></div>
-                  <div className="service-card-copy"><p>{service.tag}</p><h3>{service.title}</h3><span>{service.text}</span><button onClick={() => scrollTo('#contact')} aria-label={`Ask about ${service.title}`}>Ask about this <FaArrowRight /></button></div>
+                  <div className="service-card-copy"><p>{service.tag}</p><h3>{service.title}</h3><span>{service.text}</span><button onClick={() => navigateTo('contact')} aria-label={`Ask about ${service.title}`}>Ask about this <FaArrowRight /></button></div>
                 </Motion.article>
                 </div>
               ))}
               </Motion.div>
+              <button className="service-slider-edge service-slider-edge--next" type="button" onClick={() => moveService(1)} aria-label="Next services" disabled={currentServiceIndex === maxServiceIndex}><FaChevronRight /></button>
               <div className="service-slider-footer"><div className="slider-dots" aria-label="Select a service">{Array.from({ length: maxServiceIndex + 1 }, (_, index) => <button type="button" className={index === currentServiceIndex ? 'is-active' : ''} onClick={() => setActiveService(index)} aria-label={`Show services ${index + 1} to ${Math.min(index + servicesPerView, services.length)}`} aria-current={index === currentServiceIndex ? 'true' : undefined} key={index} />)}</div><span>{String(currentServiceIndex + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</span></div>
             </div>
           </div>
@@ -288,26 +315,28 @@ function App() {
         <Motion.section className="founder-section" {...revealSection}>
           <div className="content-wrap founder-grid">
             <div className="founder-picture"><div className="founder-pattern" /><img src={founder} alt="Founder of Finvesly Capital" /></div>
-            <div className="founder-copy"><p className="eyebrow"><span /> A people-first perspective</p><h2>Advice should make your world feel more manageable.</h2><p>Finvesly Capital exists to make financial conversations feel simpler, more honest and more useful for everyday families.</p><div className="founder-signoff"><strong>Finvesly Capital</strong><span>Har Ghar Investor, Kal Hoga Secure!</span></div><button className="text-link" onClick={() => scrollTo('#contact')}>Meet with us <span>↘</span></button></div>
+            <div className="founder-copy"><p className="eyebrow"><span /> A people-first perspective</p><h2>Advice should make your world feel more manageable.</h2><p>Finvesly Capital Services LLP exists to make financial conversations simpler, more honest and more useful for individuals, families and communities.</p><div className="founder-signoff"><strong>Finvesly Capital Services LLP</strong><span>Har Ghar Investor, Kal Hoga Secure!</span></div><button className="text-link" onClick={() => navigateTo('contact')}>Meet with us <span>↘</span></button></div>
           </div>
         </Motion.section>
 
-        <Motion.section className="stats-section" {...revealSection}>
-          <div className="content-wrap"><div className="stats-heading"><p className="eyebrow eyebrow--light"><span /> Finvesly at a glance</p><h2>Progress is built one family at a time.</h2></div><div className="stats-grid"><div><strong>₹1.62 Cr.</strong><span>Assets under management*</span></div><div><strong>150+</strong><span>Investors supported*</span></div><div><strong>5+ yrs.</strong><span>Finance-sector experience*</span></div><div><strong>10,000+</strong><span>People financially educated*</span></div></div><small>*Figures carried forward from the previous Finvesly site. Please verify before publishing.</small></div>
-        </Motion.section>
-
         <Motion.section className="faq-section" {...revealSection}>
-          <div className="content-wrap faq-grid"><div><p className="eyebrow"><span /> Questions, answered</p><h2>A clearer place to start.</h2><p>Still unsure which conversation is right for you? Reach out and we’ll help you find a useful next step.</p><a className="button button--outline" href="https://wa.me/919359049092" target="_blank" rel="noreferrer"><FaWhatsapp /> Talk on WhatsApp</a></div><div className="faq-list">{faqs.map(([question, answer], index) => <div className={activeFaq === index ? 'faq-item faq-item--active' : 'faq-item'} key={question}><button onClick={() => setActiveFaq(activeFaq === index ? -1 : index)} aria-expanded={activeFaq === index}><span>{question}</span><FaChevronDown /></button>{activeFaq === index && <p>{answer}</p>}</div>)}</div></div>
+          <div className="content-wrap faq-grid"><div><p className="eyebrow"><span /> Questions, answered</p><h2>A clearer place to start.</h2><p>Still unsure which conversation is right for you? Reach out and we’ll help you find a useful next step.</p><a className="button button--outline" href="https://wa.me/919130151120" target="_blank" rel="noreferrer"><FaWhatsapp /> Talk on WhatsApp</a></div><div className="faq-list">{faqs.map(([question, answer], index) => <div className={activeFaq === index ? 'faq-item faq-item--active' : 'faq-item'} key={question}><button onClick={() => setActiveFaq(activeFaq === index ? -1 : index)} aria-expanded={activeFaq === index}><span>{question}</span><FaChevronDown /></button>{activeFaq === index && <p>{answer}</p>}</div>)}</div></div>
         </Motion.section>
 
         <Motion.section className="contact-section" id="contact" {...revealSection}>
-          <div className="content-wrap contact-grid"><div className="contact-copy"><p className="eyebrow eyebrow--light"><span /> Make your next move considered</p><h2>Ready to begin with a conversation?</h2><p>Tell us a little about what you’re planning for. We’ll take it from there.</p><a href="tel:+919359049092" className="contact-phone"><FaPhoneAlt /> +91 93590 49092</a><span className="contact-location">Pune, Maharashtra, India</span></div><form className="contact-form" onSubmit={submitEnquiry}><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" required type="tel" placeholder="Your number" /></label><label>What would you like to discuss?<select name="interest" defaultValue=""><option value="" disabled>Select an area</option><option>Investment planning</option><option>Protection planning</option><option>Retirement planning</option><option>Education planning</option><option>Something else</option></select></label><button className="button button--primary" type="submit">Request a callback <FaRegCalendarAlt /></button>{submitted && <p className="form-success"><FaCheck /> Thank you — we’ll be in touch soon.</p>}</form></div>
+          <div className="content-wrap contact-grid"><div className="contact-copy"><p className="eyebrow eyebrow--light"><span /> Make your next move considered</p><h2>Your financial journey starts here.</h2><p>Whether you&apos;re looking for investment solutions, financial guidance, or financial awareness programs for your organisation, we&apos;re here to help.</p><a href="tel:+919130151120" className="contact-phone"><FaPhoneAlt /> +91 9130151120</a><span className="contact-location">205, Shri Padmalaxmi, Jijai Nagar, Kothrud, Pune - 411038, Maharashtra, India.</span></div><form className="contact-form" onSubmit={submitEnquiry}><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" required type="tel" placeholder="Your number" /></label><label>What would you like to discuss?<select name="interest" defaultValue=""><option value="" disabled>Select an area</option><option>Investment solutions</option><option>Financial guidance</option><option>Financial awareness program</option><option>Something else</option></select></label><button className="button button--primary" type="submit">Request a callback <FaRegCalendarAlt /></button>{submitted && <p className="form-success"><FaCheck /> Thank you - we&apos;ll be in touch soon.</p>}</form></div>
         </Motion.section>
+          </>}
+          {activePage === 'about' && <AboutPage onNavigate={navigateTo} />}
+          {activePage === 'services' && <ServicesPage onNavigate={navigateTo} />}
+          {activePage === 'contact' && <ContactPage onSubmit={submitEnquiry} submitted={submitted} />}
+          </Motion.div>
+        </AnimatePresence>
       </main>
 
-      <Motion.footer className="site-footer" {...revealSection}><div className="content-wrap footer-top"><div><img src={darkLogo} alt="Finvesly Capital" /><p>Thoughtful financial planning for the life you’re building.</p></div><div><span>Explore</span><button onClick={() => scrollTo('#about')}>About Finvesly</button><button onClick={() => scrollTo('#services')}>Services</button><button onClick={() => scrollTo('#impact')}>Our impact</button><button onClick={() => scrollTo('#process')}>Our process</button></div><div><span>Connect</span><a href="tel:+919359049092">+91 93590 49092</a><a href="https://wa.me/919359049092" target="_blank" rel="noreferrer">WhatsApp</a></div><div className="socials"><span>Follow</span><div><a href="#home" aria-label="Facebook"><FaFacebookF /></a><a href="#home" aria-label="Instagram"><FaInstagram /></a><a href="#home" aria-label="LinkedIn"><FaLinkedinIn /></a></div></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></Motion.footer>
+      <Motion.footer className="site-footer" {...revealSection}><div className="content-wrap footer-top"><div><div className="footer-wordmark"><span>Finvesly</span><b>Capital</b></div><p>Empowering financial awareness. Building a financially stronger India.</p></div><div><span>Explore</span><button onClick={() => navigateTo('home')}>Home</button><button onClick={() => navigateTo('about')}>About us</button><button onClick={() => navigateTo('services')}>Services</button><button onClick={() => navigateTo('contact')}>Contact us</button></div><div><span>Connect</span><a href="mailto:finvesly@gmail.com">finvesly@gmail.com</a><a href="tel:+919130151120">+91 9130151120</a><a href="http://www.finvesly.com/" target="_blank" rel="noreferrer">www.finvesly.com</a></div><div className="footer-registration"><span>Registration</span><p>AMFI Registered Mutual Fund Distributor</p><p>ARN: 266874</p></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital Services LLP. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></Motion.footer>
 
-      <a className="whatsapp-float" href="https://wa.me/919359049092" target="_blank" rel="noreferrer" aria-label="Chat with Finvesly on WhatsApp"><FaWhatsapp /></a>
+      <a className="whatsapp-float" href="https://wa.me/919130151120" target="_blank" rel="noreferrer" aria-label="Chat with Finvesly on WhatsApp"><FaWhatsapp /></a>
     </div>
   );
 }
