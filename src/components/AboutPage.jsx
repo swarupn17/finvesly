@@ -7,16 +7,16 @@ import workshopFour from '../assets/edu4.jpg';
 
 const commitments = [
   {
-    title: 'Financial awareness',
-    text: 'We make financial knowledge simple, accessible, and actionable for every Indian.',
+    title: 'For individuals & families',
+    text: 'We facilitate access to financial solutions, including mutual fund investments, goal-based financial planning support, retirement planning, insurance solutions, and investment portfolio reviews.',
   },
   {
-    title: 'Responsible solutions',
-    text: 'Practical education and responsible financial solutions help people make informed decisions.',
+    title: 'For corporates & organisations',
+    text: 'We offer employee financial wellness programs, financial literacy workshops, investment awareness sessions, tax awareness webinars, and retirement planning education to help employees develop better financial habits.',
   },
   {
-    title: 'Stronger communities',
-    text: 'Individuals, families, employees, and communities can all take a more confident next step.',
+    title: 'For communities & institutions',
+    text: 'We aim to promote financial literacy through educational initiatives for schools, colleges, NGOs, Bachat Gats, and community organisations.',
   },
 ];
 
@@ -35,8 +35,8 @@ function AboutPage({ onNavigate }) {
         <div className="content-wrap page-hero-grid">
           <div>
             <p className="eyebrow"><span /> About Finvesly</p>
-            <h1>Empowering financial awareness. Building a financially stronger India.</h1>
-            <p>Finvesly Capital Services LLP is a financial services and financial literacy organisation committed to making financial knowledge simple, accessible, and actionable for every Indian.</p>
+            <h1>Making financial awareness accessible to every Indian.</h1>
+            <p>Finvesly Capital Services LLP is a financial services organisation committed to making financial knowledge simple, accessible, and actionable for individuals, families, corporates, and communities.</p>
           </div>
           <aside className="page-hero-stamp" aria-label="Finvesly philosophy">
             <span>Our philosophy</span>
@@ -48,9 +48,9 @@ function AboutPage({ onNavigate }) {
       <Motion.section className="about-story content-wrap" {...reveal}>
         <div className="about-story-copy">
           <p className="eyebrow"><span /> A clear purpose</p>
-          <h2>Financial freedom begins with financial awareness.</h2>
-          <p>We believe financial freedom begins with financial awareness. Our mission is to empower individuals, families, employees, and communities to make informed financial decisions through practical education and responsible financial solutions.</p>
-          <p>We offer mutual fund distribution, goal-based financial planning support, insurance solutions, retirement planning assistance, and portfolio reviews, helping individuals work towards their long-term financial goals.</p>
+          <h2>Financial awareness is the foundation of financial well-being.</h2>
+          <p>We believe that financial awareness is the foundation of financial well-being. Our mission is to empower people to make informed financial decisions through practical financial education, awareness workshops, and responsible financial solutions.</p>
+          <p>We simplify financial concepts, encourage informed decision-making, and promote responsible financial practices through education and appropriate financial solutions.</p>
         </div>
         <div className="about-founder-frame">
           <div className="about-founder-ring" />
@@ -60,7 +60,7 @@ function AboutPage({ onNavigate }) {
 
       <Motion.section className="about-commitments" {...reveal}>
         <div className="content-wrap">
-          <p className="eyebrow"><span /> What guides us</p>
+          <p className="eyebrow"><span /> What we do</p>
           <div className="commitment-grid">
             {commitments.map((commitment, index) => (
               <article key={commitment.title}>
@@ -92,10 +92,12 @@ function AboutPage({ onNavigate }) {
         <div className="content-wrap about-vision-grid">
           <div>
             <p className="eyebrow eyebrow--light"><span /> Viksit Bharat 2047</p>
-            <h2>One individual, one family, and one community at a time.</h2>
+            <h2>A financially aware, confident, and empowered India.</h2>
           </div>
           <div>
-            <p>Aligned with the vision of Viksit Bharat 2047, we aim to build a financially aware, confident, and empowered India - one individual, one family, and one community at a time.</p>
+            <p><strong>Our Vision</strong><br />To contribute towards a financially aware, confident, and empowered India by making financial education accessible to more people.</p>
+            <p><strong>Our Mission</strong><br />To simplify financial concepts, encourage informed decision-making, and promote responsible financial practices through education and appropriate financial solutions.</p>
+            <p>Aligned with the vision of Viksit Bharat 2047, we aspire to create a lasting positive impact - one individual, one family, and one community at a time.</p>
             <button className="button button--soft" type="button" onClick={() => onNavigate('contact')}>Start a conversation <FaArrowRight /></button>
           </div>
         </div>

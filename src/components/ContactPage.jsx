@@ -16,8 +16,8 @@ function ContactPage({ onSubmit, submitted }) {
         <div className="content-wrap page-hero-grid">
           <div>
             <p className="eyebrow"><span /> Contact us</p>
-            <h1>Your financial journey starts here.</h1>
-            <p>Whether you&apos;re looking for investment solutions, financial guidance, or financial awareness programs for your organisation, we&apos;re here to help.</p>
+            <h1>Let&apos;s build a financially aware India together.</h1>
+            <p>Whether you are looking for financial solutions, employee financial wellness programs, or financial awareness workshops for your organisation, we would love to connect with you.</p>
           </div>
           <aside className="page-hero-stamp">
             <span>Finvesly Capital Services LLP</span>
@@ -34,13 +34,17 @@ function ContactPage({ onSubmit, submitted }) {
           <a href="tel:+919130151120"><FaPhoneAlt />+91 9130151120</a>
           <a href="http://www.finvesly.com/" target="_blank" rel="noreferrer">www.finvesly.com</a>
           <address><FaMapMarkerAlt /><span><strong>Registered Corporate Office</strong>205, Shri Padmalaxmi,<br />Jijai Nagar, Kothrud,<br />Pune - 411038, Maharashtra, India.</span></address>
+          <div className="contact-audience-notes">
+            <p><strong>For Individuals</strong>Explore financial solutions to support your financial goals.</p>
+            <p><strong>For Corporates &amp; Organisations</strong>Connect with us to organise financial literacy workshops, employee wellness programs, and educational webinars.</p>
+          </div>
         </div>
         <form className="contact-form contact-form--page" onSubmit={onSubmit}>
           <div className="form-heading"><p className="eyebrow"><span /> Send an enquiry</p><p>Tell us what you would like to discuss.</p></div>
           <label>Full name<input name="name" required placeholder="Your name" /></label>
           <label>Phone number<input name="phone" required type="tel" placeholder="Your number" /></label>
           <label>Email address<input name="email" required type="email" placeholder="you@example.com" /></label>
-          <label>What would you like to discuss?<select name="interest" defaultValue="" required><option value="" disabled>Select an area</option><option>Investment solutions</option><option>Financial guidance</option><option>Financial awareness program</option><option>Something else</option></select></label>
+          <label>What would you like to discuss?<select name="interest" defaultValue="" required><option value="" disabled>Select an area</option><option>For Individuals</option><option>For Corporates &amp; Organisations</option><option>Financial awareness workshop</option><option>Something else</option></select></label>
           <label className="form-message">Your message<textarea name="message" rows="4" placeholder="Share a little about how we can help" /></label>
           <button className="button button--primary" type="submit">Request a callback <FaRegCalendarAlt /></button>
           {submitted && <p className="form-success"><FaCheck /> Thank you - we&apos;ll be in touch soon.</p>}
@@ -48,7 +52,7 @@ function ContactPage({ onSubmit, submitted }) {
       </Motion.section>
 
       <Motion.section className="contact-registration" {...reveal}>
-        <div className="content-wrap"><FaCheck aria-hidden="true" /><div><strong>Finvesly Capital Services LLP</strong><span>AMFI Registered Mutual Fund Distributor | ARN: 266874</span></div><p>Contributing towards Viksit Bharat 2047.</p></div>
+        <div className="content-wrap"><FaCheck aria-hidden="true" /><div><strong>Finvesly Capital Services LLP</strong><span>AMFI Registered Mutual Fund Distributor | ARN: 266874</span></div><p>Educate First. Empower Always. Grow Together.</p></div>
       </Motion.section>
     </div>
   );

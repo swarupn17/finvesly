@@ -8,7 +8,6 @@ import {
   FaChevronRight,
   FaPhoneAlt,
   FaRegCalendarAlt,
-  FaShieldAlt,
   FaTimes,
   FaWhatsapp,
 } from 'react-icons/fa';
@@ -31,6 +30,7 @@ import workshopFour from './assets/edu4.jpg';
 import AboutPage from './components/AboutPage';
 import ServicesPage from './components/ServicesPage';
 import ContactPage from './components/ContactPage';
+import AudienceServicesPage from './components/AudienceServicesPage';
 
 const services = [
   { title: 'Mutual fund investments', text: 'SIP, lump sum, STP and SWP solutions shaped around your goals.', image: investment, tag: 'Build wealth' },
@@ -42,48 +42,10 @@ const services = [
 ];
 
 const heroSlides = [
-  {
-    eyebrow: 'Financial awareness, made actionable',
-    title: 'A financially stronger India begins with awareness.',
-    description: 'Finvesly Capital Services LLP helps individuals, families, employees and communities make more informed financial decisions through practical education and responsible solutions.',
-    image: founder,
-    alt: 'Founder of Finvesly Capital',
-    supportingImage: investment,
-    imageStyle: 'founder',
-    step: '01',
-    cardTitle: 'Start with your story',
-    cardText: 'Priorities before products',
-    progressTitle: 'Designed for progress',
-    progressText: 'Built around real life',
-  },
-  {
-    eyebrow: 'A considered future for every family',
-    title: 'Make space for the people and moments you value.',
-    description: 'Bring your family goals, retirement plans and everyday financial decisions into one calm, practical direction.',
-    image: retirementPhoto,
-    alt: 'A family enjoying time together',
-    supportingImage: marriage,
-    imageStyle: 'photo',
-    step: '02',
-    cardTitle: 'Plan around real life',
-    cardText: 'Goals that feel like yours',
-    progressTitle: 'Prepared for change',
-    progressText: 'Reviewed as life moves',
-  },
-  {
-    eyebrow: 'Educate first. Empower always.',
-    title: 'Small, steady decisions can shape a stronger tomorrow.',
-    description: 'Explore financial solutions with goal-led conversations, responsible investing, and long-term thinking at their core.',
-    image: wealth,
-    alt: 'A saving and investment growth illustration',
-    supportingImage: education,
-    imageStyle: 'photo',
-    step: '03',
-    cardTitle: 'Keep the long view',
-    cardText: 'Progress over pressure',
-    progressTitle: 'A plan with purpose',
-    progressText: 'Clarity at every step',
-  },
+  { image: retirementPhoto, alt: 'A family enjoying time together' },
+  { image: education, alt: 'Education planning illustration' },
+  { image: wealth, alt: 'Wealth planning illustration' },
+  { image: workshopThree, alt: 'Financial awareness workshop' },
 ];
 
 const faqs = [
@@ -93,7 +55,7 @@ const faqs = [
   ['How do I get started?', 'Use the enquiry form, email us, or call us to coordinate a suitable first discussion.'],
 ];
 
-const pageNames = new Set(['home', 'about', 'services', 'contact']);
+const pageNames = new Set(['home', 'about', 'services', 'individual', 'corporate', 'contact']);
 
 const getPageFromHash = () => {
   const page = window.location.hash.replace(/^#\/?/, '');
@@ -161,7 +123,11 @@ function App() {
   };
 
   const moveService = (direction) => {
-    setActiveService(Math.max(0, Math.min(services.length - servicesPerView, currentServiceIndex + direction)));
+    const lastSlideIndex = services.length - servicesPerView;
+    setActiveService((current) => {
+      const visibleIndex = Math.min(current, lastSlideIndex);
+      return (visibleIndex + direction + lastSlideIndex + 1) % (lastSlideIndex + 1);
+    });
   };
 
   const revealSection = shouldReduceMotion ? {} : {
@@ -188,6 +154,8 @@ function App() {
           <button className={activePage === 'home' ? 'is-current' : ''} onClick={() => navigateTo('home')}>Home</button>
           <button className={activePage === 'about' ? 'is-current' : ''} onClick={() => navigateTo('about')}>About us</button>
           <button className={activePage === 'services' ? 'is-current' : ''} onClick={() => navigateTo('services')}>Services</button>
+          <button className={activePage === 'individual' ? 'is-current' : ''} onClick={() => navigateTo('individual')}>Individuals</button>
+          <button className={activePage === 'corporate' ? 'is-current' : ''} onClick={() => navigateTo('corporate')}>Corporates</button>
           <button className={activePage === 'contact' ? 'is-current' : ''} onClick={() => navigateTo('contact')}>Contact</button>
         </nav>
         <button className="header-cta" onClick={() => navigateTo('contact')}>Start a conversation <FaArrowRight /></button>
@@ -200,31 +168,15 @@ function App() {
         <AnimatePresence mode="wait" initial={false}>
           <Motion.div key={activePage} initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: shouldReduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}>
           {activePage === 'home' && <>
-        <section className="hero" id="home" aria-label="Finvesly introduction">
+        <section className="hero hero--images-only" id="home" aria-label="Finvesly image gallery">
           <AnimatePresence initial={false} mode="wait">
-            <Motion.div className="hero-slide" key={heroSlide.title} initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }} transition={carouselTransition}>
-              <div className="content-wrap hero-grid">
-                <Motion.div className="hero-copy" initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...carouselTransition, delay: shouldReduceMotion ? 0 : 0.08 }}>
-                  <p className="eyebrow"><span /> {heroSlide.eyebrow}</p>
-                  <h1>{heroSlide.title}</h1>
-                  <p className="hero-description">{heroSlide.description}</p>
-                  <div className="hero-actions">
-                    <button className="button button--primary" onClick={() => navigateTo('contact')}>Start a conversation <FaArrowRight /></button>
-                    <button className="text-link" onClick={() => navigateTo('services')}>Explore our services <span>↘</span></button>
-                  </div>
-                  <div className="hero-note"><FaShieldAlt /> Goal-led guidance. Real conversations. Long-term thinking.</div>
-                </Motion.div>
-                <Motion.div className="hero-showcase" aria-label="Financial planning illustration" initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...carouselTransition, delay: shouldReduceMotion ? 0 : 0.16 }}>
-                  <div className={`hero-image-main hero-image-main--${heroSlide.imageStyle}`}><Motion.img src={heroSlide.image} alt={heroSlide.alt} initial={shouldReduceMotion ? false : { scale: 1.08 }} animate={{ scale: 1 }} transition={{ duration: shouldReduceMotion ? 0 : 1.1, ease: [0.22, 1, 0.36, 1] }} /></div>
-                  <Motion.div className="hero-image-support" initial={shouldReduceMotion ? false : { opacity: 0, rotate: 5, y: 18 }} animate={{ opacity: 1, rotate: 0, y: 0 }} transition={{ ...carouselTransition, delay: shouldReduceMotion ? 0 : 0.3 }}><img src={heroSlide.supportingImage} alt="" /></Motion.div>
-                  <div className="hero-caption"><span>{heroSlide.step}</span><div><strong>{heroSlide.cardTitle}</strong><small>{heroSlide.cardText}</small></div></div>
-                </Motion.div>
-              </div>
-            </Motion.div>
+            <Motion.figure className="hero-image-slide" key={heroSlide.alt} initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }} transition={carouselTransition}>
+              <img src={heroSlide.image} alt={heroSlide.alt} />
+            </Motion.figure>
           </AnimatePresence>
           <button className="hero-carousel-arrow hero-carousel-arrow--previous" type="button" onClick={() => moveHero(-1)} aria-label="Previous hero slide"><FaChevronLeft /></button>
           <button className="hero-carousel-arrow hero-carousel-arrow--next" type="button" onClick={() => moveHero(1)} aria-label="Next hero slide"><FaChevronRight /></button>
-          <div className="hero-carousel-pagination" aria-label="Hero slide navigation">{heroSlides.map((slide, index) => <button type="button" className={index === activeHero ? 'is-active' : ''} onClick={() => setActiveHero(index)} aria-label={`Show message ${index + 1}`} aria-current={index === activeHero ? 'true' : undefined} key={slide.title} />)}</div>
+          <div className="hero-carousel-pagination" aria-label="Hero slide navigation">{heroSlides.map((slide, index) => <button type="button" className={index === activeHero ? 'is-active' : ''} onClick={() => setActiveHero(index)} aria-label={`Show image ${index + 1}`} aria-current={index === activeHero ? 'true' : undefined} key={slide.alt} />)}</div>
         </section>
 
         <Motion.section className="intro content-wrap" id="about" {...revealSection}>
@@ -264,7 +216,7 @@ function App() {
               <div className="services-heading-side"><p>Explore the areas where a structured conversation can bring more direction to your next financial move.</p></div>
             </div>
             <div className="service-slider" aria-roledescription="carousel" aria-label="Finvesly services">
-              <button className="service-slider-edge service-slider-edge--previous" type="button" onClick={() => moveService(-1)} aria-label="Previous services" disabled={currentServiceIndex === 0}><FaChevronLeft /></button>
+              <button className="service-slider-edge service-slider-edge--previous" type="button" onClick={() => moveService(-1)} aria-label="Previous services"><FaChevronLeft /></button>
               <Motion.div className="service-track" animate={{ x: `${-currentServiceIndex * (100 / services.length)}%` }} transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 118, damping: 25, mass: 0.9 }}>
               {services.map((service, index) => (
                 <div className="service-track-item" key={service.title}>
@@ -275,7 +227,7 @@ function App() {
                 </div>
               ))}
               </Motion.div>
-              <button className="service-slider-edge service-slider-edge--next" type="button" onClick={() => moveService(1)} aria-label="Next services" disabled={currentServiceIndex === maxServiceIndex}><FaChevronRight /></button>
+              <button className="service-slider-edge service-slider-edge--next" type="button" onClick={() => moveService(1)} aria-label="Next services"><FaChevronRight /></button>
               <div className="service-slider-footer"><div className="slider-dots" aria-label="Select a service">{Array.from({ length: maxServiceIndex + 1 }, (_, index) => <button type="button" className={index === currentServiceIndex ? 'is-active' : ''} onClick={() => setActiveService(index)} aria-label={`Show services ${index + 1} to ${Math.min(index + servicesPerView, services.length)}`} aria-current={index === currentServiceIndex ? 'true' : undefined} key={index} />)}</div><span>{String(currentServiceIndex + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</span></div>
             </div>
           </div>
@@ -329,12 +281,14 @@ function App() {
           </>}
           {activePage === 'about' && <AboutPage onNavigate={navigateTo} />}
           {activePage === 'services' && <ServicesPage onNavigate={navigateTo} />}
+          {activePage === 'individual' && <AudienceServicesPage audience="individual" onNavigate={navigateTo} />}
+          {activePage === 'corporate' && <AudienceServicesPage audience="corporate" onNavigate={navigateTo} />}
           {activePage === 'contact' && <ContactPage onSubmit={submitEnquiry} submitted={submitted} />}
           </Motion.div>
         </AnimatePresence>
       </main>
 
-      <Motion.footer className="site-footer" {...revealSection}><div className="content-wrap footer-top"><div><div className="footer-wordmark"><span>Finvesly</span><b>Capital</b></div><p>Empowering financial awareness. Building a financially stronger India.</p></div><div><span>Explore</span><button onClick={() => navigateTo('home')}>Home</button><button onClick={() => navigateTo('about')}>About us</button><button onClick={() => navigateTo('services')}>Services</button><button onClick={() => navigateTo('contact')}>Contact us</button></div><div><span>Connect</span><a href="mailto:finvesly@gmail.com">finvesly@gmail.com</a><a href="tel:+919130151120">+91 9130151120</a><a href="http://www.finvesly.com/" target="_blank" rel="noreferrer">www.finvesly.com</a></div><div className="footer-registration"><span>Registration</span><p>AMFI Registered Mutual Fund Distributor</p><p>ARN: 266874</p></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital Services LLP. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></Motion.footer>
+      <Motion.footer className="site-footer" {...revealSection}><div className="content-wrap footer-top"><div><div className="footer-wordmark"><span>Finvesly</span><b>Capital</b></div><p>Empowering financial awareness. Building a financially stronger India.</p></div><div><span>Explore</span><button onClick={() => navigateTo('home')}>Home</button><button onClick={() => navigateTo('about')}>About us</button><button onClick={() => navigateTo('services')}>Services</button><button onClick={() => navigateTo('individual')}>For individuals</button><button onClick={() => navigateTo('corporate')}>For corporates</button><button onClick={() => navigateTo('contact')}>Contact us</button></div><div><span>Connect</span><a href="mailto:finvesly@gmail.com">finvesly@gmail.com</a><a href="tel:+919130151120">+91 9130151120</a><a href="http://www.finvesly.com/" target="_blank" rel="noreferrer">www.finvesly.com</a></div><div className="footer-registration"><span>Registration</span><p>AMFI Registered Mutual Fund Distributor</p><p>ARN: 266874</p></div></div><div className="content-wrap footer-bottom"><span>© {new Date().getFullYear()} Finvesly Capital Services LLP. All rights reserved.</span><span>Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully.</span></div></Motion.footer>
 
       <a className="whatsapp-float" href="https://wa.me/919130151120" target="_blank" rel="noreferrer" aria-label="Chat with Finvesly on WhatsApp"><FaWhatsapp /></a>
     </div>
