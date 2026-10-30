@@ -12,11 +12,39 @@ import workshopFour from '../assets/edu4.jpg';
 import ProductUniverse from './ProductUniverse';
 
 const individualServices = [
-  'Mutual Funds', 'SIP / SWP / SIF / AIF / PMS', 'Term Insurance', 'Health Insurance', 'Personal Accident Insurance', 'Retirement Planning', 'Child Education Planning', 'Tax Planning', 'Wealth Creation Planning', 'Goal Based Investment', 'GIFT CITY', 'NRI Investments', 'Expert Portfolio Review', 'RBI & Capital Gain Bonds', 'Secondary Market Bonds', 'FDs', 'Financial Assessment', 'Financial Planning', 'Loans',
+  { title: 'Mutual Funds', description: 'Explore diversified, professionally managed investment options aligned with your horizon and risk comfort.' },
+  { title: 'SIP / SWP / SIF / AIF / PMS', description: 'Understand systematic investing or withdrawals and specialist routes available to eligible investors.' },
+  { title: 'Term Insurance', description: 'Discuss pure life-cover options designed to protect the people who depend on you.' },
+  { title: 'Health Insurance', description: 'Review health-cover choices that can help prepare for eligible medical expenses.' },
+  { title: 'Personal Accident Insurance', description: 'Consider cover for accidental injury, disability and related contingencies, subject to policy terms.' },
+  { title: 'Retirement Planning', description: 'Map the income, savings and investment choices that can support a more independent retirement.' },
+  { title: 'Child Education Planning', description: 'Create a disciplined route towards future education expenses and important family milestones.' },
+  { title: 'Tax Planning', description: 'Explore tax-aware investment and protection options in line with applicable rules.' },
+  { title: 'Wealth Creation Planning', description: 'Build a long-term approach across goals, time horizons and appropriate asset allocation.' },
+  { title: 'Goal Based Investment', description: 'Link your money decisions to a clear purpose, timeline and regular progress review.' },
+  { title: 'GIFT CITY', description: 'Explore eligible IFSC-based international investment pathways and their applicable conditions.' },
+  { title: 'NRI Investments', description: 'Understand investment routes and practical considerations for eligible non-resident investors.' },
+  { title: 'Expert Portfolio Review', description: 'Bring existing holdings into one view to discuss diversification, risk and goal alignment.' },
+  { title: 'RBI & Capital Gain Bonds', description: 'Review government-backed and tax-linked bond avenues where eligible and appropriate.' },
+  { title: 'Secondary Market Bonds', description: 'Explore listed debt opportunities with attention to credit, price and liquidity considerations.' },
+  { title: 'FDs', description: 'Compare fixed-deposit options for defined tenures, liquidity needs and stated returns.' },
+  { title: 'Financial Assessment', description: 'Create a clear snapshot of cash flow, protection, assets, liabilities and priorities.' },
+  { title: 'Financial Planning', description: 'Bring goals, responsibilities and time horizons together in one structured financial roadmap.' },
+  { title: 'Loans', description: 'Explore relevant borrowing routes with a focus on affordability, repayment and purpose.' },
 ];
 
 const corporateServices = [
-  'Salary Management Workshop', 'SIP & Mutual Fund Awareness', 'Tax Planning Awareness', 'Retirement Planning', 'Goal Based Financial Planning', 'Debt Management', 'Insurance Awareness', 'Financial Freedom Session', 'Emergency Fund Planning', 'Financial Fraud Awareness', 'Financial Planning Workshop',
+  { title: 'Salary Management Workshop', description: 'Help employees build practical habits around income, budgeting, saving and responsible monthly decisions.' },
+  { title: 'SIP & Mutual Fund Awareness', description: 'Introduce long-term investing concepts, SIP discipline and mutual fund awareness in clear everyday language.' },
+  { title: 'Tax Planning Awareness', description: 'Explain the role of tax-aware financial decisions and commonly discussed saving avenues under applicable rules.' },
+  { title: 'Retirement Planning', description: 'Start meaningful conversations about future income needs, retirement readiness and long-term planning habits.' },
+  { title: 'Goal Based Financial Planning', description: 'Show employees how to connect financial actions with life goals, priorities and realistic timelines.' },
+  { title: 'Debt Management', description: 'Encourage healthier borrowing habits through practical discussions on repayments, affordability and debt awareness.' },
+  { title: 'Insurance Awareness', description: 'Build understanding of life, health and personal-risk protection so employees can assess their needs thoughtfully.' },
+  { title: 'Financial Freedom Session', description: 'Create an inspiring, practical introduction to financial wellbeing, discipline and informed decision-making.' },
+  { title: 'Emergency Fund Planning', description: 'Help employees understand how a dedicated reserve can support them through unexpected life events.' },
+  { title: 'Financial Fraud Awareness', description: 'Share practical awareness around common financial scams, cyber safety and safer everyday financial behaviour.' },
+  { title: 'Financial Planning Workshop', description: 'Bring core financial concepts together in an engaging session shaped around employee wellbeing.' },
 ];
 
 const audiences = {
@@ -85,7 +113,12 @@ function AudienceServicesPage({ audience, onNavigate }) {
         <div className="content-wrap">
           <div className="audience-services-heading"><div><p className="eyebrow"><span /> Our services</p><h2>{audience === 'individual' ? 'Explore your financial possibilities.' : 'Build better financial habits at work.'}</h2></div><p>{audience === 'individual' ? 'Each topic can be explored in the context of your goals and needs.' : 'Sessions can be shaped around the priorities of your employees and organisation.'}</p></div>
           <div className="audience-service-grid">
-            {content.services.map((service, index) => <Motion.article key={service} whileHover={shouldReduceMotion ? undefined : { y: -5 }} transition={{ type: 'spring', stiffness: 250, damping: 24 }}><span>{String(index + 1).padStart(2, '0')}</span><h3>{service}</h3></Motion.article>)}
+            {content.services.map((service, index) => {
+              const serviceTitle = typeof service === 'string' ? service : service.title;
+              const serviceDescription = typeof service === 'string' ? undefined : service.description;
+
+              return <Motion.article className={serviceDescription ? 'audience-service-card audience-service-card--detailed' : 'audience-service-card'} key={serviceTitle} whileHover={shouldReduceMotion ? undefined : { y: -5 }} transition={{ type: 'spring', stiffness: 250, damping: 24 }}><span>{String(index + 1).padStart(2, '0')}</span><h3>{serviceTitle}</h3>{serviceDescription && <p>{serviceDescription}</p>}</Motion.article>;
+            })}
           </div>
         </div>
       </Motion.section>

@@ -516,3 +516,53 @@ h2 { font-size:clamp(34px, 4.1vw, 56px); letter-spacing:-.058em; line-height:1.0
   .audience-closing { padding:70px 0; }
   .audience-closing-grid { grid-template-columns:1fr; gap:28px; }
 }
+
+/* Individual service cards: strong hierarchy, gentle rhythm and generous reading space. */
+.audience-page--individual .audience-service-grid { gap:14px; border:0; }
+.audience-page--individual .audience-service-card { position:relative; min-height:260px; display:flex; flex-direction:column; overflow:hidden; padding:26px; border:1px solid #d9e2d8; background:#fafbf7; }
+.audience-page--individual .audience-service-card::before { position:absolute; inset:0 auto 0 0; width:3px; background:#a7c1a6; content:''; transition:width .24s ease, background .24s ease; }
+.audience-page--individual .audience-service-card:nth-child(3n + 2) { background:#f3f6ef; }
+.audience-page--individual .audience-service-card:nth-child(3n) { background:#f7f8f2; }
+.audience-page--individual .audience-service-card:hover { border-color:#a9bea9; box-shadow:0 16px 34px rgba(37,65,45,.09); }
+.audience-page--individual .audience-service-card:hover::before { width:6px; background:#4e775b; }
+.audience-page--individual .audience-service-card > span { color:#4b7559; }
+.audience-page--individual .audience-service-card h3 { max-width:285px; margin:37px 0 0; color:#263f2f; font-size:23px; }
+.audience-page--individual .audience-service-card p { max-width:290px; margin:14px 0 0; color:#66776d; font-size:12px; line-height:1.62; }
+
+@media (max-width:900px) {
+  .audience-page--individual .audience-service-card { min-height:235px; }
+  .audience-page--individual .audience-service-card:nth-child(n) { padding:24px; border-right:1px solid #d9e2d8; }
+}
+
+@media (max-width:680px) {
+  .audience-page--individual .audience-service-grid { gap:10px; }
+  .audience-page--individual .audience-service-card,
+  .audience-page--individual .audience-service-card:nth-child(n) { min-height:0; padding:22px 22px 21px; border:1px solid #d9e2d8; }
+  .audience-page--individual .audience-service-card h3 { margin-top:28px; font-size:21px; }
+  .audience-page--individual .audience-service-card p { margin-top:10px; font-size:12px; }
+}
+
+/* Corporate service cards mirror the Individual page hierarchy without adding visual noise. */
+.audience-page--corporate .audience-service-grid { gap:14px; border:0; }
+.audience-page--corporate .audience-service-card { position:relative; min-height:250px; display:flex; flex-direction:column; overflow:hidden; padding:26px; border:1px solid #d4dfd4; background:#f8faf5; }
+.audience-page--corporate .audience-service-card::before { position:absolute; inset:0 auto 0 0; width:3px; background:#a4bda8; content:''; transition:width .24s ease, background .24s ease; }
+.audience-page--corporate .audience-service-card:nth-child(3n + 2) { background:#f1f5ef; }
+.audience-page--corporate .audience-service-card:nth-child(3n) { background:#f5f7f2; }
+.audience-page--corporate .audience-service-card:hover { border-color:#9eb6a3; box-shadow:0 16px 34px rgba(37,65,45,.09); }
+.audience-page--corporate .audience-service-card:hover::before { width:6px; background:#4e775b; }
+.audience-page--corporate .audience-service-card > span { color:#4b7559; }
+.audience-page--corporate .audience-service-card h3 { max-width:285px; margin:37px 0 0; color:#263f2f; font-size:23px; }
+.audience-page--corporate .audience-service-card p { max-width:290px; margin:14px 0 0; color:#66776d; font-size:12px; line-height:1.62; }
+
+@media (max-width:900px) {
+  .audience-page--corporate .audience-service-card { min-height:235px; }
+  .audience-page--corporate .audience-service-card:nth-child(n) { padding:24px; border-right:1px solid #d4dfd4; }
+}
+
+@media (max-width:680px) {
+  .audience-page--corporate .audience-service-grid { gap:10px; }
+  .audience-page--corporate .audience-service-card,
+  .audience-page--corporate .audience-service-card:nth-child(n) { min-height:0; padding:22px 22px 21px; border:1px solid #d4dfd4; }
+  .audience-page--corporate .audience-service-card h3 { margin-top:28px; font-size:21px; }
+  .audience-page--corporate .audience-service-card p { margin-top:10px; font-size:12px; }
+}
