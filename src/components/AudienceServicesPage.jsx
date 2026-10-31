@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
 import { FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import investment from '../assets/investImg.jpg';
-import retirementPhoto from '../assets/retirement.jpg';
-import education from '../assets/education.jpg';
-import wealth from '../assets/wealth.jpg';
-import workshopOne from '../assets/edu1.jpg';
-import workshopTwo from '../assets/edu2.JPG';
-import workshopThree from '../assets/edu3.jpg';
-import workshopFour from '../assets/edu4.jpg';
+import individualEducation from '../../assets/slider_images/Gemini_Generated_Image_d1srgcd1srgcd1sr.png';
+import individualProject from '../../assets/slider_images/Gemini_Generated_Image_p6884vp6884vp688.png';
+import individualPlanning from '../../assets/slider_images/Gemini_Generated_Image_hfgf9ahfgf9ahfgf.png';
+import corporateWorkshop from '../../assets/slider_images/Gemini_Generated_Image_9lh38j9lh38j9lh3.png';
+import corporateTeam from '../../assets/slider_images/Gemini_Generated_Image_jw67qpjw67qpjw67.png';
+import corporateLearning from '../../assets/slider_images/Gemini_Generated_Image_hsmaojhsmaojhsma.png';
 import ProductUniverse from './ProductUniverse';
 
 const individualServices = [
@@ -54,10 +52,9 @@ const audiences = {
     description: 'Explore financial solutions and planning conversations designed around your goals, responsibilities, and long-term direction.',
     services: individualServices,
     slides: [
-      { image: investment, alt: 'Investment planning illustration' },
-      { image: retirementPhoto, alt: 'Family enjoying time together' },
-      { image: education, alt: 'Education planning illustration' },
-      { image: wealth, alt: 'Wealth planning illustration' },
+      { image: individualEducation, alt: 'A parent supporting a child’s education planning' },
+      { image: individualProject, alt: 'A parent and child working on a future-focused learning project' },
+      { image: individualPlanning, alt: 'A couple reviewing their financial plans with laptops' },
     ],
     cta: 'Discuss your financial goals',
   },
@@ -67,10 +64,9 @@ const audiences = {
     description: 'Create a more financially aware workforce through practical employee wellness programs, workshops, and educational sessions.',
     services: corporateServices,
     slides: [
-      { image: workshopThree, alt: 'Large financial awareness session' },
-      { image: workshopOne, alt: 'Community financial education workshop' },
-      { image: workshopTwo, alt: 'Financial awareness program' },
-      { image: workshopFour, alt: 'Financial literacy presentation' },
+      { image: corporateWorkshop, alt: 'Financial awareness workshop for an Indian organisation' },
+      { image: corporateTeam, alt: 'Employees discussing financial planning in a workplace setting' },
+      { image: corporateLearning, alt: 'A group learning together during a financial wellness session' },
     ],
     cta: 'Plan a workplace session',
   },

@@ -27,6 +27,9 @@ import impactIcon from './assets/icon.png';
 import workshopOne from './assets/edu1.jpg';
 import workshopThree from './assets/edu3.jpg';
 import workshopFour from './assets/edu4.jpg';
+import homeFamily from '../assets/slider_images/Gemini_Generated_Image_4q8xs14q8xs14q8x.png';
+import homePlanning from '../assets/slider_images/Gemini_Generated_Image_ebv9ngebv9ngebv9.png';
+import homeRetirement from '../assets/slider_images/Gemini_Generated_Image_fjq066fjq066fjq0.png';
 import AboutPage from './components/AboutPage';
 import ServicesPage from './components/ServicesPage';
 import ContactPage from './components/ContactPage';
@@ -42,10 +45,9 @@ const services = [
 ];
 
 const heroSlides = [
-  { image: retirementPhoto, alt: 'A family enjoying time together' },
-  { image: education, alt: 'Education planning illustration' },
-  { image: wealth, alt: 'Wealth planning illustration' },
-  { image: workshopThree, alt: 'Financial awareness workshop' },
+  { image: homeFamily, alt: 'A multigenerational Indian family spending time together' },
+  { image: homePlanning, alt: 'An Indian couple reviewing their financial plans together' },
+  { image: homeRetirement, alt: 'An Indian couple enjoying an active retirement' },
 ];
 
 const faqs = [
