@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
 import { FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import individualEducation from '../../assets/slider_images/Gemini_Generated_Image_d1srgcd1srgcd1sr.png';
-import individualProject from '../../assets/slider_images/Gemini_Generated_Image_p6884vp6884vp688.png';
-import individualPlanning from '../../assets/slider_images/Gemini_Generated_Image_hfgf9ahfgf9ahfgf.png';
-import corporateWorkshop from '../../assets/slider_images/Gemini_Generated_Image_9lh38j9lh38j9lh3.png';
-import corporateTeam from '../../assets/slider_images/Gemini_Generated_Image_jw67qpjw67qpjw67.png';
-import corporateLearning from '../../assets/slider_images/Gemini_Generated_Image_hsmaojhsmaojhsma.png';
+import individualEducation from '../assets/slider-images/Gemini_Generated_Image_d1srgcd1srgcd1sr.webp';
+import individualProject from '../assets/slider-images/Gemini_Generated_Image_p6884vp6884vp688.webp';
+import individualPlanning from '../assets/slider-images/Gemini_Generated_Image_hfgf9ahfgf9ahfgf.webp';
+import corporateWorkshop from '../assets/slider-images/Gemini_Generated_Image_9lh38j9lh38j9lh3.webp';
+import corporateTeam from '../assets/slider-images/Gemini_Generated_Image_jw67qpjw67qpjw67.webp';
+import corporateLearning from '../assets/slider-images/Gemini_Generated_Image_hsmaojhsmaojhsma.webp';
+import individualEducationMobile from '../assets/slider-images/Gemini_Generated_Image_d1srgcd1srgcd1sr-1200.webp';
+import individualProjectMobile from '../assets/slider-images/Gemini_Generated_Image_p6884vp6884vp688-1200.webp';
+import individualPlanningMobile from '../assets/slider-images/Gemini_Generated_Image_hfgf9ahfgf9ahfgf-1200.webp';
+import corporateWorkshopMobile from '../assets/slider-images/Gemini_Generated_Image_9lh38j9lh38j9lh3-1200.webp';
+import corporateTeamMobile from '../assets/slider-images/Gemini_Generated_Image_jw67qpjw67qpjw67-1200.webp';
+import corporateLearningMobile from '../assets/slider-images/Gemini_Generated_Image_hsmaojhsmaojhsma-1200.webp';
 import ProductUniverse from './ProductUniverse';
 
 const individualServices = [
@@ -52,9 +58,9 @@ const audiences = {
     description: 'Explore financial solutions and planning conversations designed around your goals, responsibilities, and long-term direction.',
     services: individualServices,
     slides: [
-      { image: individualEducation, alt: 'A parent supporting a child’s education planning' },
-      { image: individualProject, alt: 'A parent and child working on a future-focused learning project' },
-      { image: individualPlanning, alt: 'A couple reviewing their financial plans with laptops' },
+      { image: individualEducation, mobileImage: individualEducationMobile, alt: 'A parent supporting a child’s education planning' },
+      { image: individualProject, mobileImage: individualProjectMobile, alt: 'A parent and child working on a future-focused learning project' },
+      { image: individualPlanning, mobileImage: individualPlanningMobile, alt: 'A couple reviewing their financial plans with laptops' },
     ],
     cta: 'Discuss your financial goals',
   },
@@ -64,9 +70,9 @@ const audiences = {
     description: 'Create a more financially aware workforce through practical employee wellness programs, workshops, and educational sessions.',
     services: corporateServices,
     slides: [
-      { image: corporateWorkshop, alt: 'Financial awareness workshop for an Indian organisation' },
-      { image: corporateTeam, alt: 'Employees discussing financial planning in a workplace setting' },
-      { image: corporateLearning, alt: 'A group learning together during a financial wellness session' },
+      { image: corporateWorkshop, mobileImage: corporateWorkshopMobile, alt: 'Financial awareness workshop for an Indian organisation' },
+      { image: corporateTeam, mobileImage: corporateTeamMobile, alt: 'Employees discussing financial planning in a workplace setting' },
+      { image: corporateLearning, mobileImage: corporateLearningMobile, alt: 'A group learning together during a financial wellness session' },
     ],
     cta: 'Plan a workplace session',
   },
@@ -92,7 +98,7 @@ function AudienceServicesPage({ audience, onNavigate }) {
       <section className="audience-banner" aria-label={`${audience} service banner carousel`}>
         <AnimatePresence initial={false} mode="wait">
           <Motion.figure className="audience-banner-slide" key={activeSlide} initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }} transition={{ duration: shouldReduceMotion ? 0 : 0.52, ease: [0.22, 1, 0.36, 1] }}>
-            <img src={activeBanner.image} alt={activeBanner.alt} />
+            <img src={activeBanner.image} srcSet={`${activeBanner.mobileImage} 1200w, ${activeBanner.image} 2400w`} sizes="100vw" alt={activeBanner.alt} width="2400" height="1019" fetchPriority={activeSlide === 0 ? 'high' : 'auto'} decoding="async" />
           </Motion.figure>
         </AnimatePresence>
         <button className="audience-banner-arrow audience-banner-arrow--previous" type="button" onClick={() => moveSlide(-1)} aria-label="Previous banner image"><FaChevronLeft /></button>

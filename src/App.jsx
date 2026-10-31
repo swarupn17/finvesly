@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import {
   FaArrowRight,
   FaBars,
@@ -13,27 +13,30 @@ import {
 } from 'react-icons/fa';
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'framer-motion';
 import './App.css';
-import lightLogo from './assets/light.png';
-import founder from './assets/swrup.png';
-import investment from './assets/investImg.jpg';
-import insurance from './assets/insurance.png';
-import retirementPhoto from './assets/retirement.jpg';
-import retirementPlan from './assets/retire.png';
-import education from './assets/education.jpg';
-import savings from './assets/saving.jpg';
-import wealth from './assets/wealth.jpg';
-import marriage from './assets/marriage.jpg';
-import impactIcon from './assets/icon.png';
-import workshopOne from './assets/edu1.jpg';
-import workshopThree from './assets/edu3.jpg';
-import workshopFour from './assets/edu4.jpg';
-import homeFamily from '../assets/slider_images/Gemini_Generated_Image_4q8xs14q8xs14q8x.png';
-import homePlanning from '../assets/slider_images/Gemini_Generated_Image_ebv9ngebv9ngebv9.png';
-import homeRetirement from '../assets/slider_images/Gemini_Generated_Image_fjq066fjq066fjq0.png';
-import AboutPage from './components/AboutPage';
-import ServicesPage from './components/ServicesPage';
-import ContactPage from './components/ContactPage';
-import AudienceServicesPage from './components/AudienceServicesPage';
+import lightLogo from './assets/optimized/light.webp';
+import founder from './assets/optimized/swrup.webp';
+import investment from './assets/optimized/investImg.webp';
+import insurance from './assets/optimized/insurance.webp';
+import retirementPhoto from './assets/optimized/retirement.webp';
+import retirementPlan from './assets/optimized/retire.webp';
+import education from './assets/optimized/education.webp';
+import savings from './assets/optimized/saving.webp';
+import wealth from './assets/optimized/wealth.webp';
+import marriage from './assets/optimized/marriage.webp';
+import impactIcon from './assets/optimized/icon.webp';
+import workshopOne from './assets/optimized/edu1.webp';
+import workshopThree from './assets/optimized/edu3.webp';
+import workshopFour from './assets/optimized/edu4.webp';
+import homeFamily from './assets/slider-images/Gemini_Generated_Image_4q8xs14q8xs14q8x.webp';
+import homePlanning from './assets/slider-images/Gemini_Generated_Image_ebv9ngebv9ngebv9.webp';
+import homeRetirement from './assets/slider-images/Gemini_Generated_Image_fjq066fjq066fjq0.webp';
+import homeFamilyMobile from './assets/slider-images/Gemini_Generated_Image_4q8xs14q8xs14q8x-1200.webp';
+import homePlanningMobile from './assets/slider-images/Gemini_Generated_Image_ebv9ngebv9ngebv9-1200.webp';
+import homeRetirementMobile from './assets/slider-images/Gemini_Generated_Image_fjq066fjq066fjq0-1200.webp';
+const AboutPage = lazy(() => import('./components/AboutPage'));
+const ServicesPage = lazy(() => import('./components/ServicesPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const AudienceServicesPage = lazy(() => import('./components/AudienceServicesPage'));
 
 const services = [
   { title: 'Mutual fund investments', text: 'SIP, lump sum, STP and SWP solutions shaped around your goals.', image: investment, tag: 'Build wealth' },
@@ -45,9 +48,9 @@ const services = [
 ];
 
 const heroSlides = [
-  { image: homeFamily, alt: 'A multigenerational Indian family spending time together' },
-  { image: homePlanning, alt: 'An Indian couple reviewing their financial plans together' },
-  { image: homeRetirement, alt: 'An Indian couple enjoying an active retirement' },
+  { image: homeFamily, mobileImage: homeFamilyMobile, alt: 'A multigenerational Indian family spending time together' },
+  { image: homePlanning, mobileImage: homePlanningMobile, alt: 'An Indian couple reviewing their financial plans together' },
+  { image: homeRetirement, mobileImage: homeRetirementMobile, alt: 'An Indian couple enjoying an active retirement' },
 ];
 
 const faqs = [
@@ -167,13 +170,14 @@ function App() {
       </Motion.header>
 
       <main id="main-content">
+        <link rel="preload" as="image" href={heroSlides[0].image} type="image/webp" />
         <AnimatePresence mode="wait" initial={false}>
           <Motion.div key={activePage} initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: shouldReduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}>
           {activePage === 'home' && <>
         <section className="hero hero--images-only" id="home" aria-label="Finvesly image gallery">
           <AnimatePresence initial={false} mode="wait">
             <Motion.figure className="hero-image-slide" key={heroSlide.alt} initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }} transition={carouselTransition}>
-              <img src={heroSlide.image} alt={heroSlide.alt} />
+              <img src={heroSlide.image} srcSet={`${heroSlide.mobileImage} 1200w, ${heroSlide.image} 2400w`} sizes="100vw" alt={heroSlide.alt} width="2400" height="1019" fetchPriority="high" decoding="async" />
             </Motion.figure>
           </AnimatePresence>
           <button className="hero-carousel-arrow hero-carousel-arrow--previous" type="button" onClick={() => moveHero(-1)} aria-label="Previous hero slide"><FaChevronLeft /></button>
@@ -197,12 +201,12 @@ function App() {
             </div>
             <div className="impact-layout">
               <div className="workshop-gallery">
-                <figure className="workshop-photo workshop-photo--lead"><img src={workshopThree} alt="A large financial-awareness session" /><figcaption>Investor education session</figcaption></figure>
-                <figure className="workshop-photo"><img src={workshopOne} alt="A financial-awareness discussion with a community group" /><figcaption>Community conversation</figcaption></figure>
-                <figure className="workshop-photo"><img src={workshopFour} alt="An audience attending a financial-planning presentation" /><figcaption>Learning together</figcaption></figure>
+                <figure className="workshop-photo workshop-photo--lead"><img src={workshopThree} alt="A large financial-awareness session" loading="lazy" decoding="async" /><figcaption>Investor education session</figcaption></figure>
+                <figure className="workshop-photo"><img src={workshopOne} alt="A financial-awareness discussion with a community group" loading="lazy" decoding="async" /><figcaption>Community conversation</figcaption></figure>
+                <figure className="workshop-photo"><img src={workshopFour} alt="An audience attending a financial-planning presentation" loading="lazy" decoding="async" /><figcaption>Learning together</figcaption></figure>
               </div>
               <aside className="impact-aside">
-                <img className="brand-stamp" src={lightLogo} alt="Finvesly Capital" />
+                <img className="brand-stamp" src={lightLogo} alt="Finvesly Capital" width="1200" height="925" loading="lazy" decoding="async" />
                 <p className="quote-label">A principle worth keeping</p>
                 <blockquote>“Diligence is the mother of good luck.”<cite>Benjamin Franklin · <em>Poor Richard’s Almanack</em></cite></blockquote>
                 <p>From large awareness sessions to a one-to-one conversation, the objective stays the same: make money matters easier to understand and act on.</p>
@@ -223,7 +227,7 @@ function App() {
               {services.map((service, index) => (
                 <div className="service-track-item" key={service.title}>
                 <Motion.article className="service-card service-slider-card" whileHover={shouldReduceMotion ? undefined : { y: -6, boxShadow: '0 20px 34px rgba(36, 65, 47, 0.12)' }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
-                  <div className="service-image"><img src={service.image} alt="" /><span>{String(index + 1).padStart(2, '0')}</span></div>
+                  <div className="service-image"><img src={service.image} alt="" loading="lazy" decoding="async" /><span>{String(index + 1).padStart(2, '0')}</span></div>
                   <div className="service-card-copy"><p>{service.tag}</p><h3>{service.title}</h3><span>{service.text}</span><button onClick={() => navigateTo('contact')} aria-label={`Ask about ${service.title}`}>Ask about this <FaArrowRight /></button></div>
                 </Motion.article>
                 </div>
@@ -247,9 +251,9 @@ function App() {
           <div className="content-wrap">
             <div className="life-goals-heading"><div><p className="eyebrow"><span /> The life behind the numbers</p><h2>Make room for the moments you want to protect.</h2></div><p>A sound plan is not only about markets. It makes space for independence, family milestones and the everyday habits that support a more secure tomorrow.</p></div>
             <div className="life-goals-grid">
-              <article className="life-goal-card life-goal-card--wide"><img src={retirementPhoto} alt="A family enjoying time together in retirement" /><div><span>Retirement readiness</span><h3>Plan for the years that are yours.</h3></div></article>
-              <article className="life-goal-card"><img src={marriage} alt="A couple exchanging wedding rings" /><div><span>Family milestones</span><h3>Prepare for life’s big celebrations.</h3></div></article>
-              <article className="life-goal-card life-goal-card--icon"><img src={impactIcon} alt="A hand supporting financial growth" /><div><span>Everyday progress</span><h3>Small steps can build a stronger future.</h3></div></article>
+              <article className="life-goal-card life-goal-card--wide"><img src={retirementPhoto} alt="A family enjoying time together in retirement" loading="lazy" decoding="async" /><div><span>Retirement readiness</span><h3>Plan for the years that are yours.</h3></div></article>
+              <article className="life-goal-card"><img src={marriage} alt="A couple exchanging wedding rings" loading="lazy" decoding="async" /><div><span>Family milestones</span><h3>Prepare for life’s big celebrations.</h3></div></article>
+              <article className="life-goal-card life-goal-card--icon"><img src={impactIcon} alt="A hand supporting financial growth" width="512" height="512" loading="lazy" decoding="async" /><div><span>Everyday progress</span><h3>Small steps can build a stronger future.</h3></div></article>
             </div>
           </div>
         </Motion.section>
@@ -268,7 +272,7 @@ function App() {
 
         <Motion.section className="founder-section" {...revealSection}>
           <div className="content-wrap founder-grid">
-            <div className="founder-picture"><div className="founder-pattern" /><img src={founder} alt="Founder of Finvesly Capital" /></div>
+            <div className="founder-picture"><div className="founder-pattern" /><img src={founder} alt="Founder of Finvesly Capital" width="1000" height="1500" loading="lazy" decoding="async" /></div>
             <div className="founder-copy"><p className="eyebrow"><span /> A people-first perspective</p><h2>Advice should make your world feel more manageable.</h2><p>Finvesly Capital Services LLP exists to make financial conversations simpler, more honest and more useful for individuals, families and communities.</p><div className="founder-signoff"><strong>Finvesly Capital Services LLP</strong><span>Har Ghar Investor, Kal Hoga Secure!</span></div><button className="text-link" onClick={() => navigateTo('contact')}>Meet with us <span>↘</span></button></div>
           </div>
         </Motion.section>
@@ -281,11 +285,13 @@ function App() {
           <div className="content-wrap contact-grid"><div className="contact-copy"><p className="eyebrow eyebrow--light"><span /> Make your next move considered</p><h2>Your financial journey starts here.</h2><p>Whether you&apos;re looking for investment solutions, financial guidance, or financial awareness programs for your organisation, we&apos;re here to help.</p><a href="tel:+919130151120" className="contact-phone"><FaPhoneAlt /> +91 9130151120</a><span className="contact-location">205, Shri Padmalaxmi, Jijai Nagar, Kothrud, Pune - 411038, Maharashtra, India.</span></div><form className="contact-form" onSubmit={submitEnquiry}><label>Full name<input name="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" required type="tel" placeholder="Your number" /></label><label>What would you like to discuss?<select name="interest" defaultValue=""><option value="" disabled>Select an area</option><option>Investment solutions</option><option>Financial guidance</option><option>Financial awareness program</option><option>Something else</option></select></label><button className="button button--primary" type="submit">Request a callback <FaRegCalendarAlt /></button>{submitted && <p className="form-success"><FaCheck /> Thank you - we&apos;ll be in touch soon.</p>}</form></div>
         </Motion.section>
           </>}
-          {activePage === 'about' && <AboutPage onNavigate={navigateTo} />}
-          {activePage === 'services' && <ServicesPage onNavigate={navigateTo} />}
-          {activePage === 'individual' && <AudienceServicesPage audience="individual" onNavigate={navigateTo} />}
-          {activePage === 'corporate' && <AudienceServicesPage audience="corporate" onNavigate={navigateTo} />}
-          {activePage === 'contact' && <ContactPage onSubmit={submitEnquiry} submitted={submitted} />}
+          <Suspense fallback={null}>
+            {activePage === 'about' && <AboutPage onNavigate={navigateTo} />}
+            {activePage === 'services' && <ServicesPage onNavigate={navigateTo} />}
+            {activePage === 'individual' && <AudienceServicesPage audience="individual" onNavigate={navigateTo} />}
+            {activePage === 'corporate' && <AudienceServicesPage audience="corporate" onNavigate={navigateTo} />}
+            {activePage === 'contact' && <ContactPage onSubmit={submitEnquiry} submitted={submitted} />}
+          </Suspense>
           </Motion.div>
         </AnimatePresence>
       </main>

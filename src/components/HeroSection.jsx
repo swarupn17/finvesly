@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/HeroSection.css';
-import img from '../assets/swrup.png';
+import img from '../assets/optimized/swrup.webp';
+
+const words = ["SUSTAINABLE WEALTH.", "TRUE INDEPENDENCE.", "FAMILY SECURITY.", "PEACE OF MIND.", "LIFE GOALS."];
 
 const HeroSection = () => {
   const [text, setText] = useState('');
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const words = ["SUSTAINABLE WEALTH.", "TRUE INDEPENDENCE.", "FAMILY SECURITY.", "PEACE OF MIND.", "LIFE GOALS."];
   const typeSpeed = 100;
   const deleteSpeed = 50;
   const pauseTime = 2000;
@@ -21,8 +22,10 @@ const HeroSection = () => {
     if (!isDeleting && text === currentWord) {
       timer = setTimeout(() => setIsDeleting(true), pauseTime);
     } else if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setWordIndex((prev) => (prev + 1) % words.length);
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }, 0);
     } else {
       timer = setTimeout(() => {
         if (isDeleting) {
@@ -48,7 +51,7 @@ const HeroSection = () => {
       </div>
       <div className="hero-image">
         {/* Placeholder for the image - using a similar style placeholder or the actual URL if available */}
-        <img src={img} alt="Finvesly financial educator" />
+        <img src={img} alt="Finvesly financial educator" width="1000" height="1500" fetchPriority="high" decoding="async" />
       </div>
     </section>
   );

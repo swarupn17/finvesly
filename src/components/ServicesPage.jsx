@@ -1,7 +1,7 @@
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
-import individualImage from '../assets/investImg.jpg';
-import corporateImage from '../assets/edu3.jpg';
+import individualImage from '../assets/optimized/investImg.webp';
+import corporateImage from '../assets/optimized/edu3.webp';
 
 const audienceCards = [
   {
@@ -45,7 +45,7 @@ function ServicesPage({ onNavigate }) {
         <div className="service-audience-grid">
           {audienceCards.map((card) => (
             <Motion.article key={card.id} whileHover={shouldReduceMotion ? undefined : { y: -6 }} transition={{ type: 'spring', stiffness: 250, damping: 24 }}>
-              <img src={card.image} alt="" />
+              <img src={card.image} alt="" loading="lazy" decoding="async" />
               <div><p>{card.eyebrow}</p><h3>{card.title}</h3><span>{card.description}</span><button type="button" onClick={() => onNavigate(card.id)}>{card.action} <FaArrowRight /></button></div>
             </Motion.article>
           ))}

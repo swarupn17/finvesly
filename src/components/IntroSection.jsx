@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/IntroSection.css';
-import edu1 from '../assets/edu1.jpg';
-import edu2 from '../assets/edu2.JPG';
-import edu3 from '../assets/edu3.jpg';
-import edu4 from '../assets/edu4.jpg';
+import edu1 from '../assets/optimized/edu1.webp';
+import edu2 from '../assets/optimized/edu2.webp';
+import edu3 from '../assets/optimized/edu3.webp';
+import edu4 from '../assets/optimized/edu4.webp';
 
 const IntroSection = () => {
   const sectionRef = useRef(null);
@@ -79,6 +79,8 @@ const IntroSection = () => {
               src="https://nicolelapin.com/wp-content/uploads/2023/10/nicole-foundermade-ipad.png" 
               alt="Nicole Lapin Speaking" 
               className="center-image"
+              loading="lazy"
+              decoding="async"
             />
         </div>
 
@@ -97,7 +99,7 @@ const IntroSection = () => {
                 zIndex: 1 // Ensure they are behind the center image (which is z-index 10)
               }}
             >
-              <img src={img.src} alt={`Media appearance ${index + 1}`} />
+              <img src={img.src} alt={`Media appearance ${index + 1}`} loading="lazy" decoding="async" />
             </div>
           );
         })}

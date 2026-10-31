@@ -35,7 +35,6 @@ build/
 *.njsproj
 *.sln
 *.sw?
-.github
 
 # OS generated files
 .DS_Store?

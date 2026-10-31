@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import '../styles/Footer.css';
-import lightLogo from '../assets/dark.png';
+import lightLogo from '../assets/optimized/dark.webp';
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="footer-col brand-col">
             <Link to="/" className="footer-logo-link">
-              <img src={lightLogo} alt="Finvesly" className="footer-logo" />
+              <img src={lightLogo} alt="Finvesly" className="footer-logo" width="1200" height="925" loading="lazy" decoding="async" />
             </Link>
             <p className="footer-description">
               Finvesly Capital is a wealth management and financial literacy firm dedicated to empowering Indian families across all income classes.

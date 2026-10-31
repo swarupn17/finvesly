@@ -1,9 +1,9 @@
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { FaArrowRight, FaCheck } from 'react-icons/fa';
-import founder from '../assets/swrup.png';
-import workshopOne from '../assets/edu1.jpg';
-import workshopThree from '../assets/edu3.jpg';
-import workshopFour from '../assets/edu4.jpg';
+import founder from '../assets/optimized/swrup.webp';
+import workshopOne from '../assets/optimized/edu1.webp';
+import workshopThree from '../assets/optimized/edu3.webp';
+import workshopFour from '../assets/optimized/edu4.webp';
 
 const commitments = [
   {
@@ -54,7 +54,7 @@ function AboutPage({ onNavigate }) {
         </div>
         <div className="about-founder-frame">
           <div className="about-founder-ring" />
-          <img src={founder} alt="Finvesly Capital Services LLP representative" />
+          <img src={founder} alt="Finvesly Capital Services LLP representative" width="1000" height="1500" loading="lazy" decoding="async" />
         </div>
       </Motion.section>
 
@@ -82,9 +82,9 @@ function AboutPage({ onNavigate }) {
           <p>Beyond financial services, we conduct financial awareness workshops, corporate webinars, employee financial wellness programs, and community education initiatives for schools, corporates, organisations, and Bachat Gats.</p>
         </div>
         <div className="about-learning-gallery">
-          <figure><img src={workshopThree} alt="Financial awareness session" /><figcaption>Financial awareness workshop</figcaption></figure>
-          <figure><img src={workshopOne} alt="Community financial education discussion" /><figcaption>Community education initiative</figcaption></figure>
-          <figure><img src={workshopFour} alt="Financial literacy program presentation" /><figcaption>Financial literacy program</figcaption></figure>
+          <figure><img src={workshopThree} alt="Financial awareness session" loading="lazy" decoding="async" /><figcaption>Financial awareness workshop</figcaption></figure>
+          <figure><img src={workshopOne} alt="Community financial education discussion" loading="lazy" decoding="async" /><figcaption>Community education initiative</figcaption></figure>
+          <figure><img src={workshopFour} alt="Financial literacy program presentation" loading="lazy" decoding="async" /><figcaption>Financial literacy program</figcaption></figure>
         </div>
       </Motion.section>
 

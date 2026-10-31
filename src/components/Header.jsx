@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css';
-import lightLogo from '../assets/light.png';
-import darkLogo from '../assets/dark.png';
+import lightLogo from '../assets/optimized/light.webp';
+import darkLogo from '../assets/optimized/dark.webp';
 
 const Header = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -36,6 +36,9 @@ const Header = () => {
               src={isDark ? darkLogo : lightLogo} 
               alt="Finvesly" 
               className="logo-image"
+              width="1200"
+              height="925"
+              decoding="async"
             />
           </Link>
         </div>

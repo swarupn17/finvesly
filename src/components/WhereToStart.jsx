@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/WhereToStart.css';
-import retirementImg from '../assets/retirement.jpg';
-import educationImg from '../assets/education.jpg';
-import marriageImg from '../assets/marriage.jpg';
+import retirementImg from '../assets/optimized/retirement.webp';
+import educationImg from '../assets/optimized/education.webp';
+import marriageImg from '../assets/optimized/marriage.webp';
 
 const WhereToStart = () => {
   return (
@@ -20,7 +20,7 @@ const WhereToStart = () => {
             SECURE YOUR<br />GOLDEN YEARS
           </h3>
           <div className="wts-image-container">
-             <img src={retirementImg} alt="Retirement" className="wts-image" />
+             <img src={retirementImg} alt="Retirement" className="wts-image" loading="lazy" decoding="async" />
           </div>
         </div>
 
@@ -31,7 +31,7 @@ const WhereToStart = () => {
             INVEST IN THEIR<br />FUTURE SUCCESS
           </h3>
           <div className="wts-image-container">
-             <img src={educationImg} alt="Child Education" className="wts-image" />
+             <img src={educationImg} alt="Child Education" className="wts-image" loading="lazy" decoding="async" />
           </div>
         </div>
 
@@ -42,7 +42,7 @@ const WhereToStart = () => {
             PLAN FOR THEIR<br />BIG DAY
           </h3>
           <div className="wts-image-container">
-             <img src={marriageImg} alt="Child Marriage" className="wts-image" />
+             <img src={marriageImg} alt="Child Marriage" className="wts-image" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>

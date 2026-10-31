@@ -3,12 +3,12 @@ import { FaCheck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import '../styles/Services.css';
-import investImg from '../assets/investImg.jpg';
-import insuranceImg from '../assets/insurance.png';
-import educationImg from '../assets/education.jpg';
-import retirementImg from '../assets/retire.png';
-import savingImg from '../assets/saving.jpg';
-import wealthImg from '../assets/wealth.jpg';
+import investImg from '../assets/optimized/investImg.webp';
+import insuranceImg from '../assets/optimized/insurance.webp';
+import educationImg from '../assets/optimized/education.webp';
+import retirementImg from '../assets/optimized/retire.webp';
+import savingImg from '../assets/optimized/saving.webp';
+import wealthImg from '../assets/optimized/wealth.webp';
 
 
 const servicesData = [
@@ -69,7 +69,7 @@ const Services = () => {
           {servicesData.map((service) => (
             <div key={service.id} className="service-card">
               <div className="service-image-container">
-                <img src={service.image} alt={service.title} className="service-image" />
+                <img src={service.image} alt={service.title} className="service-image" loading="lazy" decoding="async" />
               </div>
               <div className="service-content">
                 <h3 className="service-title">{service.title}</h3>

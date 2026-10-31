@@ -110,7 +110,7 @@ const Testimonials = () => {
                 >
                   <div className="testimonial-card">
                     <div className="card-image-container">
-                      <img src={testimonial.image} alt={testimonial.name} className="author-image" />
+                      <img src={testimonial.image} alt={testimonial.name} className="author-image" loading="lazy" decoding="async" width="80" height="80" />
                     </div>
                     <h3 className="author-name">{testimonial.name}</h3>
                     <div className="author-role">
